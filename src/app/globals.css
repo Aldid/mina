@@ -1,55 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #fbf9f6;
-  --foreground: #231f1d;
+  --flo-pink: #ff5b79;
+  --flo-pink-hover: #f43f68;
+  --flo-pink-light: #fff0f3;
+  --flo-bg: #fff8f8;
+  --flo-card: #ffffff;
+  --flo-text: #231f20;
+  --flo-muted: #8e8788;
 }
 
 body {
-  color: var(--foreground);
-  background: radial-gradient(circle at 50% 0%, #fff0f3 0%, #fbf9f6 45%, #f9f5ee 100%);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  color: var(--flo-text);
+  background: radial-gradient(circle at 50% -10%, #ffe8ed 0%, #fff8f8 55%, #fbf5f2 100%);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
-.font-serif {
-  font-family: 'Playfair Display', Georgia, serif;
+/* Flo-style Glowing Central Ring */
+.flo-circle-pulse {
+  box-shadow: 0 0 0 0 rgba(255, 91, 121, 0.4);
+  animation: flo-pulse 3s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
 
-/* Beauty Ring Light effect */
-.ring-light {
-  box-shadow: 0 0 0 4px rgba(253, 164, 175, 0.3), 0 0 35px rgba(251, 113, 133, 0.15);
-}
-
-.ring-light-active {
-  box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.4), 0 0 50px rgba(244, 63, 94, 0.25);
-}
-
-/* Subtle scanning line */
-@keyframes beauty-sweep {
+@keyframes flo-pulse {
   0% {
-    top: 5%;
-    opacity: 0.3;
+    box-shadow: 0 0 0 0 rgba(255, 91, 121, 0.4), 0 10px 40px -10px rgba(255, 91, 121, 0.3);
   }
   50% {
-    opacity: 0.9;
+    box-shadow: 0 0 0 16px rgba(255, 91, 121, 0), 0 15px 50px -5px rgba(255, 91, 121, 0.4);
   }
   100% {
-    top: 92%;
-    opacity: 0.3;
+    box-shadow: 0 0 0 0 rgba(255, 91, 121, 0), 0 10px 40px -10px rgba(255, 91, 121, 0.3);
   }
 }
 
-.animate-beauty-sweep {
-  position: absolute;
-  width: 90%;
-  left: 5%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #fb718d, #f43f68, #fb718d, transparent);
-  box-shadow: 0 0 16px #fb718d;
-  animation: beauty-sweep 2.4s ease-in-out infinite alternate;
+/* Flo Card Soft Shadow */
+.flo-card-shadow {
+  box-shadow: 0 10px 35px -5px rgba(255, 91, 121, 0.08), 0 2px 10px -2px rgba(0, 0, 0, 0.02);
+}
+
+/* Hide scrollbars for story carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
