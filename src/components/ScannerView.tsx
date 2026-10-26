@@ -6,13 +6,10 @@ import {
   Upload,
   Sparkles,
   Zap,
-  Info,
-  CheckCircle2,
   RefreshCw,
-  Sliders,
   Shield,
-  Eye,
   Crosshair,
+  Heart,
 } from 'lucide-react';
 import { SkinMetrics, ScanResult } from '../types';
 import { MINA_PRESETS, analyzeImageHeuristics, generateSkincareProtocol } from '../lib/skinEngine';
@@ -48,7 +45,7 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
     setCameraError(null);
     try {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        throw new Error('Camera access is not supported by your browser.');
+        throw new Error('Камера не поддерживается вашим браузером.');
       }
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
@@ -66,7 +63,7 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
       }
       setIsCameraActive(true);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Unable to access webcam.';
+      const message = err instanceof Error ? err.message : 'Не удалось получить доступ к камере.';
       setCameraError(message);
       setIsCameraActive(false);
     }
@@ -84,21 +81,21 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
     };
   }, [activeTab, startCamera, stopCamera]);
 
-  // Execute animated diagnostic scan sequence
+  // Execute friendly animated diagnostic scan sequence
   const executeScanSequence = (metrics: SkinMetrics, source: 'webcam' | 'upload' | 'preset') => {
     setIsScanning(true);
-    setScanStep('Mapping 468+ facial landmarks & skin zones...');
+    setScanStep('Сканируем контуры лица и микро-зоны...');
 
     setTimeout(() => {
-      setScanStep('Analyzing T-Zone sebum & hydration levels...');
+      setScanStep('Оцениваем баланс влаги и себума...');
     }, 700);
 
     setTimeout(() => {
-      setScanStep('Evaluating redness, barrier health & pore texture...');
+      setScanStep('Проверяем чистоту пор и спокойствие кожи...');
     }, 1400);
 
     setTimeout(() => {
-      setScanStep('Generating personalized AM/PM protocol...');
+      setScanStep('Составляем твой персональный уход...');
     }, 2100);
 
     setTimeout(() => {
@@ -164,61 +161,61 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-6">
+    <div className="w-full max-w-3xl mx-auto space-y-6">
       {/* Intro hero banner */}
-      <div className="text-center space-y-2 pt-2 pb-1">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-rose-700 text-xs font-semibold">
+      <div className="text-center space-y-2 pt-1 pb-1">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-rose-700 text-xs font-bold">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Asian Beauty-Tech Skin Analyzer</span>
+          <span>Твой персональный AI-уход за кожей</span>
         </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold tracking-tight text-stone-900">
-          Discover Your Skin’s True Biometrics
+          Узнай, что нужно твоей коже прямо сейчас
         </h1>
-        <p className="text-xs sm:text-sm text-stone-600 max-w-xl mx-auto leading-relaxed">
-          Inspired by in-store diagnostic kiosks in Vietnam & Korea. Scan your face to map sebum, hydration, pore density, and sensitivity, then receive a personalized dermatological protocol.
+        <p className="text-xs sm:text-sm text-stone-500 max-w-lg mx-auto leading-relaxed">
+          Вдохновлено бьюти-аппаратами в Азии. Просканируй лицо через камеру или выбери фото — Mina за секунды подберёт идеальный утренний и вечерний уход.
         </p>
       </div>
 
       {/* Mode selection tabs */}
       <div className="flex justify-center">
-        <div className="inline-flex p-1 bg-stone-200/70 rounded-xl border border-stone-200 text-xs font-semibold text-stone-600">
+        <div className="inline-flex p-1 bg-stone-100 rounded-2xl border border-stone-200 text-xs font-bold text-stone-600">
           <button
             type="button"
             onClick={() => setActiveTab('camera')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl transition-all ${
               activeTab === 'camera'
                 ? 'bg-white text-stone-900 shadow-xs font-bold'
                 : 'hover:text-stone-900'
             }`}
           >
-            <Camera className="w-3.5 h-3.5 text-rose-600" />
-            <span>Live Kiosk Camera</span>
+            <Camera className="w-3.5 h-3.5 text-rose-500" />
+            <span>Камера</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('upload')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl transition-all ${
               activeTab === 'upload'
                 ? 'bg-white text-stone-900 shadow-xs font-bold'
                 : 'hover:text-stone-900'
             }`}
           >
-            <Upload className="w-3.5 h-3.5 text-rose-600" />
-            <span>Upload Selfie</span>
+            <Upload className="w-3.5 h-3.5 text-rose-500" />
+            <span>Загрузить фото</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('presets')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl transition-all ${
               activeTab === 'presets'
                 ? 'bg-white text-stone-900 shadow-xs font-bold'
                 : 'hover:text-stone-900'
             }`}
           >
             <Zap className="w-3.5 h-3.5 text-amber-500" />
-            <span>1-Click Presets</span>
+            <span>Готовые пресеты</span>
           </button>
         </div>
       </div>
@@ -228,8 +225,8 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
 
       {/* TAB 1: LIVE WEBCAM SCANNER */}
       {activeTab === 'camera' && (
-        <div className="bg-white rounded-2xl border border-stone-200/90 shadow-md p-4 sm:p-6 space-y-4">
-          <div className="relative aspect-4/3 max-w-xl mx-auto rounded-xl overflow-hidden bg-stone-900 flex items-center justify-center border border-stone-800 shadow-inner">
+        <div className="bg-white rounded-3xl border border-stone-200/90 shadow-sm p-4 sm:p-6 space-y-4">
+          <div className="relative aspect-4/3 max-w-lg mx-auto rounded-2xl overflow-hidden bg-stone-900 flex items-center justify-center border border-stone-800 shadow-inner">
             {/* Live Video element */}
             <video
               ref={videoRef}
@@ -243,84 +240,77 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
             {/* Camera error fallback */}
             {!isCameraActive && (
               <div className="p-6 text-center text-stone-300 space-y-3">
-                <div className="w-12 h-12 rounded-full bg-stone-800 border border-stone-700 flex items-center justify-center mx-auto text-rose-400">
+                <div className="w-12 h-12 rounded-full bg-stone-800 border border-stone-700 flex items-center justify-center mx-auto text-rose-300">
                   <Camera className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
-                  <p className="text-sm font-semibold text-white">Camera Offline or Awaiting Permission</p>
+                  <p className="text-sm font-bold text-white">Включите камеру или разрешите доступ</p>
                   <p className="text-xs text-stone-400 max-w-xs mx-auto">
-                    {cameraError || 'Please allow webcam access, or switch to Upload Selfie / 1-Click Presets.'}
+                    {cameraError || 'Разрешите доступ к веб-камере в браузере или воспользуйтесь готовыми пресетами.'}
                   </p>
                 </div>
                 <div className="flex justify-center gap-2 pt-1">
                   <button
                     type="button"
                     onClick={startCamera}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md bg-stone-800 hover:bg-stone-700 text-xs text-white border border-stone-600 transition-colors"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-xs text-white border border-stone-600 transition-colors"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
-                    <span>Try Again</span>
+                    <span>Попробовать снова</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setActiveTab('presets')}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md bg-rose-600 hover:bg-rose-700 text-xs text-white font-semibold shadow-xs transition-colors"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-xs text-white font-bold shadow-xs transition-colors"
                   >
                     <Zap className="w-3.5 h-3.5" />
-                    <span>Try 1-Click Presets</span>
+                    <span>Открыть готовые пресеты</span>
                   </button>
                 </div>
               </div>
             )}
 
-            {/* Kiosk Biometric Overlay & Zone Targets (visible when camera is active) */}
+            {/* Kiosk Biometric Overlay & Zone Targets */}
             {isCameraActive && (
               <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-4">
-                {/* Top status bar */}
+                {/* Top status */}
                 <div className="flex items-center justify-between text-[11px] text-white/90 bg-stone-950/60 backdrop-blur-xs px-3 py-1.5 rounded-full border border-white/10">
-                  <div className="flex items-center gap-1.5 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                    <span>KIOSK SENSOR ACTIVE</span>
+                  <div className="flex items-center gap-1.5 font-medium">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Камера готова</span>
                   </div>
-                  <div className="flex items-center gap-1 font-mono text-stone-300">
-                    <Crosshair className="w-3 h-3 text-rose-400" />
-                    <span>ZONE MAPPING</span>
+                  <div className="flex items-center gap-1 text-rose-300 font-medium">
+                    <Crosshair className="w-3 h-3" />
+                    <span>Сканирование зон лица</span>
                   </div>
                 </div>
 
-                {/* Central Biometric Oval Guide with Animated Corner Targets */}
-                <div className="relative mx-auto w-48 sm:w-60 h-64 sm:h-80 rounded-full border-2 border-dashed border-rose-400/60 animate-pulse-ring flex items-center justify-center">
-                  {/* Scanning beam line when analyzing */}
+                {/* Central Soft Oval Guide */}
+                <div className="relative mx-auto w-44 sm:w-56 h-60 sm:h-72 rounded-full border-2 border-dashed border-rose-300/80 animate-pulse-ring flex items-center justify-center">
                   {isScanning && <div className="animate-scanline" />}
 
-                  {/* Corner aesthetic brackets */}
-                  <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-rose-400" />
-                  <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-rose-400" />
-                  <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-rose-400" />
-                  <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-rose-400" />
-
-                  {/* Zone markers */}
-                  <span className="absolute top-6 text-[9px] font-mono tracking-widest bg-stone-900/80 text-rose-300 px-1.5 py-0.5 rounded border border-rose-400/40">
-                    FOREHEAD • SEBUM
+                  {/* Gentle Zone Markers */}
+                  <span className="absolute top-5 text-[9px] font-bold bg-stone-900/80 text-rose-200 px-2 py-0.5 rounded-full border border-rose-400/30">
+                    Лоб • Себум
                   </span>
-                  <span className="absolute top-24 text-[9px] font-mono tracking-widest bg-stone-900/80 text-rose-300 px-1.5 py-0.5 rounded border border-rose-400/40">
-                    T-ZONE • PORES
+                  <span className="absolute top-22 text-[9px] font-bold bg-stone-900/80 text-rose-200 px-2 py-0.5 rounded-full border border-rose-400/30">
+                    T-Зона • Поры
                   </span>
-                  <span className="absolute left-2 top-36 text-[9px] font-mono tracking-widest bg-stone-900/80 text-rose-300 px-1.5 py-0.5 rounded border border-rose-400/40">
-                    CHEEK
+                  <span className="absolute left-2 top-32 text-[9px] font-bold bg-stone-900/80 text-rose-200 px-2 py-0.5 rounded-full border border-rose-400/30">
+                    Щёки
                   </span>
-                  <span className="absolute right-2 top-36 text-[9px] font-mono tracking-widest bg-stone-900/80 text-rose-300 px-1.5 py-0.5 rounded border border-rose-400/40">
-                    BARRIER
+                  <span className="absolute right-2 top-32 text-[9px] font-bold bg-stone-900/80 text-rose-200 px-2 py-0.5 rounded-full border border-rose-400/30">
+                    Барьер
                   </span>
-                  <span className="absolute bottom-6 text-[9px] font-mono tracking-widest bg-stone-900/80 text-rose-300 px-1.5 py-0.5 rounded border border-rose-400/40">
-                    CHIN • HYDRATION
+                  <span className="absolute bottom-5 text-[9px] font-bold bg-stone-900/80 text-rose-200 px-2 py-0.5 rounded-full border border-rose-400/30">
+                    Подбородок
                   </span>
                 </div>
 
                 {/* Bottom guidance */}
                 <div className="text-center">
-                  <span className="text-[11px] text-white/80 bg-stone-950/60 backdrop-blur-xs px-3 py-1 rounded-full border border-white/10">
-                    Center face within oval & ensure even lighting
+                  <span className="text-[11px] text-white/90 bg-stone-950/60 backdrop-blur-xs px-3.5 py-1 rounded-full border border-white/10">
+                    Помести лицо в овал при хорошем свете
                   </span>
                 </div>
               </div>
@@ -334,10 +324,10 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
                 type="button"
                 onClick={handleCaptureWebcam}
                 disabled={isScanning}
-                className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-white shadow-md transition-all ${
+                className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl font-bold text-xs sm:text-sm text-white shadow-md transition-all ${
                   isScanning
                     ? 'bg-rose-400 cursor-wait'
-                    : 'bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-700 hover:to-rose-600 active:scale-[0.98]'
+                    : 'bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 active:scale-[0.98]'
                 }`}
               >
                 {isScanning ? (
@@ -348,7 +338,7 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4" />
-                    <span>Capture & Analyze Skin Biometrics</span>
+                    <span>Сканировать лицо и подобрать уход</span>
                   </>
                 )}
               </button>
@@ -359,7 +349,7 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
 
       {/* TAB 2: UPLOAD PHOTO / SELFIE */}
       {activeTab === 'upload' && (
-        <div className="bg-white rounded-2xl border border-stone-200/90 shadow-md p-6 sm:p-8 space-y-4">
+        <div className="bg-white rounded-3xl border border-stone-200/90 shadow-sm p-6 sm:p-8 space-y-4">
           <input
             type="file"
             ref={fileInputRef}
@@ -370,7 +360,7 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
 
           {uploadedImagePreview ? (
             <div className="space-y-4 text-center">
-              <div className="relative max-w-sm mx-auto aspect-4/3 rounded-xl overflow-hidden border border-stone-200 shadow-inner">
+              <div className="relative max-w-sm mx-auto aspect-4/3 rounded-2xl overflow-hidden border border-stone-200 shadow-inner">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={uploadedImagePreview}
@@ -381,7 +371,7 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
               </div>
 
               {isScanning ? (
-                <div className="inline-flex items-center gap-2 text-rose-600 text-xs font-semibold">
+                <div className="inline-flex items-center gap-2 text-rose-600 text-xs font-bold">
                   <RefreshCw className="w-4 h-4 animate-spin" />
                   <span>{scanStep}</span>
                 </div>
@@ -389,32 +379,32 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-stone-700 bg-stone-100 hover:bg-stone-200 border border-stone-300"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-stone-700 bg-stone-100 hover:bg-stone-200 border border-stone-300"
                 >
                   <Upload className="w-3.5 h-3.5 text-stone-500" />
-                  <span>Choose Another Image</span>
+                  <span>Выбрать другое фото</span>
                 </button>
               )}
             </div>
           ) : (
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-stone-300 hover:border-rose-400 rounded-xl p-8 sm:p-12 text-center cursor-pointer bg-stone-50/50 hover:bg-rose-50/20 transition-all space-y-3"
+              className="border-2 border-dashed border-rose-200 hover:border-rose-400 rounded-3xl p-8 sm:p-12 text-center cursor-pointer bg-rose-50/20 hover:bg-rose-50/40 transition-all space-y-3"
             >
-              <div className="w-12 h-12 rounded-full bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 mx-auto">
+              <div className="w-12 h-12 rounded-full bg-rose-100 border border-rose-200 flex items-center justify-center text-rose-600 mx-auto">
                 <Upload className="w-6 h-6" />
               </div>
               <div className="space-y-1">
-                <p className="text-sm font-semibold text-stone-800">
-                  Click to select or drop a portrait photo
+                <p className="text-sm font-bold text-stone-800">
+                  Нажми сюда, чтобы загрузить селфи
                 </p>
                 <p className="text-xs text-stone-500">
-                  Supports JPG, PNG, and WebP up to 10 MB. High-resolution front-facing lighting recommended.
+                  Подойдёт любое чёткое фото лица при дневном свете (JPG, PNG, WebP).
                 </p>
               </div>
               <div className="inline-flex items-center gap-1 text-[11px] text-stone-400">
-                <Shield className="w-3.5 h-3.5" />
-                <span>Photos are analyzed in memory and never saved to a server.</span>
+                <Shield className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Фото обрабатывается прямо в браузере и не сохраняется на сервере.</span>
               </div>
             </div>
           )}
@@ -423,18 +413,18 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
 
       {/* TAB 3: 1-CLICK CURATED ASIAN PRESETS */}
       {activeTab === 'presets' && (
-        <div className="bg-white rounded-2xl border border-stone-200/90 shadow-md p-6 space-y-4">
+        <div className="bg-white rounded-3xl border border-stone-200/90 shadow-sm p-6 space-y-4">
           <div className="flex items-center justify-between pb-1 border-b border-stone-100">
             <div>
-              <h3 className="text-sm font-bold text-stone-900">
-                1-Click Preset Skin Profiles
+              <h3 className="text-sm font-bold text-stone-900 font-serif">
+                Выбери профиль кожи для мгновенного теста
               </h3>
               <p className="text-xs text-stone-500">
-                Test the diagnostic engine instantly with pre-calibrated profiles inspired by Asian dermatology kiosks.
+                Попробуй сканер в 1 клик на реальных типах кожи.
               </p>
             </div>
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-              Instant Mode
+            <span className="text-[10px] font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">
+              1 клик
             </span>
           </div>
 
@@ -445,10 +435,10 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
                 type="button"
                 onClick={() => handleSelectPreset(preset)}
                 disabled={isScanning}
-                className="text-left p-4 rounded-xl border border-stone-200 hover:border-rose-300 hover:bg-rose-50/30 transition-all shadow-2xs group flex items-start gap-3.5"
+                className="text-left p-4 rounded-2xl border border-stone-200/90 hover:border-rose-300 hover:bg-rose-50/20 transition-all shadow-2xs group flex items-start gap-3.5"
               >
                 <div
-                  className={`w-10 h-10 rounded-lg bg-gradient-to-tr ${preset.avatarColor} shrink-0 flex items-center justify-center text-white shadow-xs font-serif font-bold text-base`}
+                  className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${preset.avatarColor} shrink-0 flex items-center justify-center text-white shadow-xs font-serif font-bold text-base`}
                 >
                   {preset.title.charAt(0)}
                 </div>
@@ -458,7 +448,7 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
                     <span className="text-xs font-bold text-stone-900 truncate group-hover:text-rose-700 transition-colors">
                       {preset.title}
                     </span>
-                    <span className="text-[10px] font-semibold px-1.5 py-0.2 rounded bg-stone-100 text-stone-600 border border-stone-200">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-stone-100 text-stone-600 border border-stone-200">
                       {preset.previewMetrics.skinType}
                     </span>
                   </div>
@@ -469,7 +459,7 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
 
                   <div className="flex items-center gap-2 pt-0.5 text-[11px] font-medium text-stone-600">
                     <span className="font-bold text-stone-900 font-mono">
-                      {preset.previewMetrics.score}/100 Health
+                      {preset.previewMetrics.score}/100 Glow
                     </span>
                     <span>•</span>
                     <span className="text-rose-600 truncate">
@@ -482,7 +472,7 @@ export const ScannerView: React.FC<ScannerViewProps> = ({ onScanComplete }) => {
           </div>
 
           {isScanning && (
-            <div className="p-3 rounded-lg bg-rose-50 border border-rose-200 flex items-center justify-center gap-2 text-xs text-rose-800 font-semibold">
+            <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center gap-2 text-xs text-rose-800 font-bold">
               <RefreshCw className="w-4 h-4 animate-spin text-rose-600" />
               <span>{scanStep}</span>
             </div>

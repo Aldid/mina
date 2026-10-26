@@ -61,26 +61,26 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-stone-200/80 bg-white/50 backdrop-blur-xs py-8 mt-12 text-stone-500 text-xs">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer className="border-t border-rose-100/80 bg-white/60 backdrop-blur-xs py-8 mt-12 text-stone-400 text-xs">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-serif font-bold text-stone-800 text-sm">Mina</span>
             <span>•</span>
-            <span>Asian Beauty-Tech Skin Intelligence</span>
+            <span>Красота и умный уход за кожей</span>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-stone-400">
             <span className="flex items-center gap-1">
               <Shield className="w-3.5 h-3.5 text-emerald-600" />
-              100% In-Memory Vision
+              Приватно • Обработка в RAM
             </span>
             <span>•</span>
             <span className="flex items-center gap-1">
-              <Cpu className="w-3.5 h-3.5 text-stone-500" />
+              <Cpu className="w-3.5 h-3.5 text-stone-400" />
               AMD AI Ecosystem Ready
             </span>
             <span>•</span>
-            <span>Inspired by Minh Hà Vietnam & Asian Cosmetic Kiosks</span>
+            <span>Вдохновлено бьюти-аппаратами Minh Hà Vietnam</span>
           </div>
         </div>
       </footer>
