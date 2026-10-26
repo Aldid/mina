@@ -29,11 +29,11 @@ const amSunscreen = oilyRoutine.am.find((s) => s.phase === 'Sun Defense');
 assert(amSunscreen, 'AM routine must always include SPF 50+ Sun Defense');
 
 // Oily PM should include BHA exfoliant
-const pmBHA = oilyRoutine.pm.find((s) => s.keyActives.some((a) => a.includes('Salicylic Acid')));
+const pmBHA = oilyRoutine.pm.find((s) => s.keyActives.some((a) => a.includes('салицилат') || a.includes('Салициловая')));
 assert(pmBHA, 'Oily PM routine must include Salicylic Acid (BHA)');
 
 // Oily contraindications should avoid heavy pore-clogging oils
-const avoidPoreClog = oilyRoutine.ingredientsToAvoid.find((i) => i.ingredient.includes('Coconut'));
+const avoidPoreClog = oilyRoutine.ingredientsToAvoid.find((i) => i.ingredient.toLowerCase().includes('масла'));
 assert(avoidPoreClog, 'Oily skin should avoid comedogenic oils');
 console.log('✅ Oily skin protocol matches clinical guidelines.');
 
@@ -43,12 +43,12 @@ const sensitivePreset = MINA_PRESETS.find((p) => p.sampleMetrics.skinType === 'S
 const sensitiveRoutine = generateSkincareProtocol(sensitivePreset.sampleMetrics);
 
 // Sensitive routine should recommend Centella / Cica
-const hasCica = sensitiveRoutine.keyIngredientsToSeek.some((k) => k.ingredient.includes('Centella'));
+const hasCica = sensitiveRoutine.keyIngredientsToSeek.some((k) => k.ingredient.includes('Центелла') || k.ingredient.includes('Cica'));
 assert(hasCica, 'Sensitive skin must recommend Centella Asiatica / Cica');
 
 // Sensitive contraindications should strictly avoid denatured alcohol and synthetic fragrances
-const avoidAlcohol = sensitiveRoutine.ingredientsToAvoid.find((i) => i.ingredient.includes('Alcohol'));
-assert(avoidAlcohol, 'Sensitive skin must warn against denatured alcohol');
-console.log('✅ Sensitive skin protocol matches clinical guidelines.');
+const avoidAlcohol = sensitiveRoutine.ingredientsToAvoid.find((i) => i.ingredient.includes('спирт') || i.ingredient.includes('Alcohol'));
+assert(avoidAlcohol, 'Sensitive skin must warn against drying alcohol');
+console.log('✅ Sensitive skin protocol matches soothing guidelines.');
 
-console.log('\n🎉 ALL 3 TESTS PASSED! Mina Skin Engine is 100% verified.\n');
+console.log('\n✨ All Mina Dermatological Engine tests passed!\n');

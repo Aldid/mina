@@ -1,58 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #faf8f5;
-  --foreground: #1c1917;
+  --background: #fbf9f6;
+  --foreground: #231f1d;
 }
 
 body {
   color: var(--foreground);
-  background-color: var(--background);
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  background: radial-gradient(circle at 50% 0%, #fff0f3 0%, #fbf9f6 45%, #f9f5ee 100%);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Glassmorphism and scanning animations */
-@keyframes scanline {
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Beauty Ring Light effect */
+.ring-light {
+  box-shadow: 0 0 0 4px rgba(253, 164, 175, 0.3), 0 0 35px rgba(251, 113, 133, 0.15);
+}
+
+.ring-light-active {
+  box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.4), 0 0 50px rgba(244, 63, 94, 0.25);
+}
+
+/* Subtle scanning line */
+@keyframes beauty-sweep {
   0% {
-    top: 0%;
-    opacity: 0.8;
+    top: 5%;
+    opacity: 0.3;
   }
   50% {
-    opacity: 1;
+    opacity: 0.9;
   }
   100% {
-    top: 98%;
-    opacity: 0.8;
+    top: 92%;
+    opacity: 0.3;
   }
 }
 
-.animate-scanline {
+.animate-beauty-sweep {
   position: absolute;
-  width: 100%;
+  width: 90%;
+  left: 5%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #f43f68, #fb718d, transparent);
-  box-shadow: 0 0 15px #f43f68;
-  animation: scanline 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-}
-
-.animate-pulse-ring {
-  animation: pulse-ring 3s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, #fb718d, #f43f68, #fb718d, transparent);
+  box-shadow: 0 0 16px #fb718d;
+  animation: beauty-sweep 2.4s ease-in-out infinite alternate;
 }

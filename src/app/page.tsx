@@ -17,16 +17,15 @@ export default function Home() {
     setScanResult(result);
     setActiveStage('dashboard');
 
-    // Subtle celebration confetti on diagnostic completion
     try {
       confetti({
-        particleCount: 40,
+        particleCount: 35,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#F43F68', '#FB718D', '#B09B7A', '#F9F6F0'],
+        colors: ['#F43F5E', '#FDA4AF', '#FDE047', '#E0E7FF'],
       });
     } catch {
-      // Ignore if canvas-confetti is not available
+      // Ignore if confetti is unavailable
     }
   };
 
@@ -36,10 +35,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF8F5]">
+    <div className="min-h-screen flex flex-col selection:bg-rose-100 selection:text-rose-900">
       <Header hasActiveScan={Boolean(scanResult)} onReset={handleReset} />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {activeStage === 'scan' && (
           <ScannerView onScanComplete={handleScanComplete} />
         )}
@@ -61,26 +60,26 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-rose-100/80 bg-white/60 backdrop-blur-xs py-8 mt-12 text-stone-400 text-xs">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer className="border-t border-rose-100/60 bg-white/40 backdrop-blur-xs py-6 mt-8 text-stone-400 text-xs">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <div className="flex items-center gap-2">
-            <span className="font-serif font-bold text-stone-800 text-sm">Mina</span>
+            <span className="font-bold text-stone-800 text-sm">Mina</span>
             <span>•</span>
-            <span>Красота и умный уход за кожей</span>
+            <span>Бьюти-диагностика и бережный уход за кожей</span>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-stone-400">
+          <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] text-stone-400">
             <span className="flex items-center gap-1">
               <Shield className="w-3.5 h-3.5 text-emerald-600" />
               Приватно • Обработка в RAM
             </span>
             <span>•</span>
             <span className="flex items-center gap-1">
-              <Cpu className="w-3.5 h-3.5 text-stone-400" />
-              AMD AI Ecosystem Ready
+              <Cpu className="w-3.5 h-3.5 text-rose-400" />
+              AMD AI Ecosystem
             </span>
             <span>•</span>
-            <span>Вдохновлено бьюти-аппаратами Minh Hà Vietnam</span>
+            <span>Minh Hà Beauty Concept</span>
           </div>
         </div>
       </footer>

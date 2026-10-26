@@ -8,8 +8,9 @@ import {
   Heart,
   ChevronRight,
   Smile,
-  MapPin,
-  Flame,
+  Flower2,
+  CheckCircle2,
+  Info,
 } from 'lucide-react';
 import { SkinMetrics, ZoneAnalysis } from '../types';
 
@@ -24,78 +25,77 @@ export const DiagnosticDashboard: React.FC<DiagnosticDashboardProps> = ({
 }) => {
   const [selectedZone, setSelectedZone] = useState<ZoneAnalysis>(metrics.zones[0]);
 
-  // Simplified friendly metrics for everyday users
-  const simplePillars = [
+  const beautyPillars = [
     {
       label: 'Увлажненность',
-      enLabel: 'Hydration',
+      sub: metrics.hydration >= 70 ? 'Кожа напитанная и эластичная' : 'Нуждается в мягком увлажняющем тонере',
       value: metrics.hydration,
-      status: metrics.hydration >= 70 ? 'Бархатистая и напитанная' : 'Требует увлажнения',
       icon: Droplets,
-      textColor: 'text-sky-700',
-      bgColor: 'bg-sky-50/80 border-sky-200/80',
-      barColor: 'bg-sky-400',
+      color: 'from-sky-400 to-blue-400',
+      badgeBg: 'bg-sky-50 text-sky-800 border-sky-100',
     },
     {
-      label: 'Матовость и себум',
-      enLabel: 'Oil Balance',
+      label: 'Матовость Т-зоны',
+      sub: metrics.sebumControl >= 65 ? 'Бархатный финиш без блеска' : 'Легкий блеск к середине дня',
       value: metrics.sebumControl,
-      status: metrics.sebumControl >= 65 ? 'Сбалансированная' : 'Склонна к блеску в T-зоне',
-      icon: Flame,
-      textColor: 'text-amber-800',
-      bgColor: 'bg-amber-50/80 border-amber-200/80',
-      barColor: 'bg-amber-400',
+      icon: Flower2,
+      color: 'from-amber-400 to-rose-400',
+      badgeBg: 'bg-amber-50 text-amber-800 border-amber-100',
     },
     {
       label: 'Защитный барьер',
-      enLabel: 'Skin Barrier',
+      sub: metrics.barrierHealth >= 70 ? 'Крепкий защитный барьер' : 'Нуждается в церамидах и защите',
       value: metrics.barrierHealth,
-      status: metrics.barrierHealth >= 70 ? 'Стойкий и здоровый' : 'Чувствительный к перепадам',
       icon: Shield,
-      textColor: 'text-emerald-800',
-      bgColor: 'bg-emerald-50/80 border-emerald-200/80',
-      barColor: 'bg-emerald-400',
+      color: 'from-emerald-400 to-teal-400',
+      badgeBg: 'bg-emerald-50 text-emerald-800 border-emerald-100',
     },
     {
-      label: 'Спокойствие кожи',
-      enLabel: 'Calmness',
+      label: 'Спокойствие тона',
+      sub: metrics.rednessSensitivity >= 65 ? 'Ровный фарфоровый цвет лица' : 'Склонность к легкому румянцу',
       value: metrics.rednessSensitivity,
-      status: metrics.rednessSensitivity >= 65 ? 'Ровный красивый тон' : 'Склонна к покраснениям',
       icon: Heart,
-      textColor: 'text-rose-800',
-      bgColor: 'bg-rose-50/80 border-rose-200/80',
-      barColor: 'bg-rose-400',
+      color: 'from-rose-400 to-pink-400',
+      badgeBg: 'bg-rose-50 text-rose-800 border-rose-100',
     },
   ];
 
+  const zoneNamesRu: Record<string, string> = {
+    'Forehead': 'Лоб',
+    'T-Zone': 'Т-зона (нос)',
+    'Cheeks': 'Щёки',
+    'Under-Eye': 'Зона вокруг глаз',
+    'Chin': 'Подбородок',
+  };
+
   return (
-    <div className="w-full max-w-3xl mx-auto space-y-6">
+    <div className="w-full max-w-2xl mx-auto space-y-6">
       {/* Glow Snapshot Hero Card */}
-      <div className="bg-gradient-to-br from-white via-rose-50/30 to-amber-50/20 rounded-3xl border border-rose-100/90 shadow-sm p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-5">
-            {/* Glowing Score Ring */}
-            <div className="relative w-22 h-22 sm:w-24 sm:h-24 shrink-0 rounded-full bg-gradient-to-tr from-rose-200 via-rose-300 to-amber-200 flex items-center justify-center p-1.5 shadow-sm">
+      <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-rose-100 p-6 sm:p-7 shadow-sm space-y-5">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+            {/* Glowing Aura Ring */}
+            <div className="relative w-22 h-22 shrink-0 rounded-full bg-gradient-to-tr from-rose-400 via-rose-200 to-amber-200 p-1 shadow-md">
               <div className="w-full h-full rounded-full bg-white flex flex-col items-center justify-center">
-                <span className="text-3xl font-serif font-black text-stone-900 leading-none">
+                <span className="text-3xl font-extrabold text-stone-900 leading-none">
                   {metrics.overallHealthScore}
                 </span>
-                <span className="text-[10px] tracking-widest uppercase font-bold text-rose-500 mt-1">
+                <span className="text-[9px] tracking-wider uppercase font-bold text-rose-500 mt-0.5">
                   Glow Score
                 </span>
               </div>
             </div>
 
-            <div className="space-y-1.5 text-center sm:text-left">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Тип кожи: {metrics.skinType}</span>
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200/70 text-xs font-semibold">
+                <Sparkles className="w-3 h-3 text-rose-500" />
+                <span>Тип: {metrics.skinType === 'Combination' ? 'Комбинированная' : metrics.skinType === 'Sensitive' ? 'Чувствительная' : metrics.skinType === 'Oily' ? 'Склонная к жирности' : metrics.skinType === 'Dry' ? 'Сухая' : 'Нормальная (Glass Skin)'}</span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-serif font-bold text-stone-900 tracking-tight">
-                Твой снимок сияния
+              <h2 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
+                Твоя карта сияния кожи
               </h2>
-              <p className="text-xs text-stone-500 leading-relaxed">
-                Фокус внимания: <span className="font-semibold text-rose-700">{metrics.primaryConcern}</span>.
+              <p className="text-xs text-stone-500 leading-relaxed max-w-xs">
+                Главный акцент ухода: <span className="font-semibold text-rose-600">{metrics.primaryConcern}</span>.
               </p>
             </div>
           </div>
@@ -103,112 +103,111 @@ export const DiagnosticDashboard: React.FC<DiagnosticDashboardProps> = ({
           <button
             type="button"
             onClick={onProceedToProtocol}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-stone-900 hover:bg-stone-950 text-white text-xs font-bold shadow-md hover:shadow-lg transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white text-xs font-bold shadow-md hover:shadow-lg transition-all active:scale-95"
           >
-            <span>Посмотреть твой ритуал ухода</span>
-            <ChevronRight className="w-4 h-4 text-rose-300" />
+            <span>Мой ритуал ухода (AM/PM)</span>
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
 
-        {/* 4 Soft Friendly Pillars */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-          {simplePillars.map((p) => (
-            <div
-              key={p.label}
-              className={`p-4 rounded-2xl border ${p.bgColor} space-y-2 transition-all hover:bg-white`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <p.icon className={`w-4 h-4 ${p.textColor}`} />
-                  <span className="text-xs font-bold text-stone-900">
-                    {p.label}
-                  </span>
+        {/* 4 Soft Beauty Metric Pills */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2 border-t border-rose-50">
+          {beautyPillars.map((pillar) => {
+            const Icon = pillar.icon;
+            return (
+              <div
+                key={pillar.label}
+                className="bg-stone-50/70 rounded-2xl p-3 border border-stone-100 flex flex-col justify-between space-y-1.5"
+              >
+                <div className="flex items-center justify-between">
+                  <Icon className="w-4 h-4 text-rose-500" />
+                  <span className="text-xs font-bold text-stone-900">{pillar.value}%</span>
                 </div>
-                <span className="text-xs font-mono font-bold text-stone-700">
-                  {p.value}%
-                </span>
+                <div>
+                  <h4 className="text-xs font-semibold text-stone-800 leading-none">
+                    {pillar.label}
+                  </h4>
+                  <p className="text-[10px] text-stone-500 mt-1 leading-tight">
+                    {pillar.sub}
+                  </p>
+                </div>
               </div>
-
-              {/* Gentle progress track */}
-              <div className="w-full h-1.5 rounded-full bg-stone-200/60 overflow-hidden">
-                <div
-                  className={`h-full rounded-full ${p.barColor} transition-all duration-700`}
-                  style={{ width: `${p.value}%` }}
-                />
-              </div>
-
-              <p className="text-[11px] text-stone-600 font-medium">
-                {p.status}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* Simplified Face Zones — Click to explore */}
-      <div className="bg-white rounded-3xl border border-stone-200/80 shadow-xs p-6 space-y-4">
-        <div className="flex items-center justify-between pb-1">
-          <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-rose-500" />
-            <h3 className="text-sm font-bold text-stone-900 font-serif">
-              Зоны твоего лица
+      {/* Interactive 5-Zone Face Guide */}
+      <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-rose-100 p-6 shadow-sm space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
+              <Smile className="w-4 h-4 text-rose-500" />
+              <span>Зональный разбор лица</span>
             </h3>
+            <p className="text-xs text-stone-500">
+              Нажми на зону лица, чтобы узнать подробное наблюдение и рекомендацию:
+            </p>
           </div>
-          <span className="text-[11px] text-stone-400 font-medium">
-            Нажми на зону, чтобы увидеть совет
-          </span>
         </div>
 
-        {/* Easy Zone Buttons */}
-        <div className="flex flex-wrap gap-2">
-          {metrics.zones.map((z) => (
-            <button
-              key={z.zone}
-              type="button"
-              onClick={() => setSelectedZone(z)}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                selectedZone.zone === z.zone
-                  ? 'bg-rose-50 text-rose-900 border border-rose-300 shadow-xs font-bold'
-                  : 'bg-stone-50 text-stone-600 hover:bg-stone-100 border border-stone-200/80'
-              }`}
-            >
-              <span
-                className={`w-2 h-2 rounded-full ${
-                  z.severity === 'Optimal'
-                    ? 'bg-emerald-400'
-                    : z.severity === 'Mild'
-                    ? 'bg-amber-400'
-                    : 'bg-rose-400'
+        {/* Zone Selector Chips */}
+        <div className="flex flex-wrap gap-1.5">
+          {metrics.zones.map((zone) => {
+            const isSelected = selectedZone.zone === zone.zone;
+            const ruName = zoneNamesRu[zone.zone] || zone.zone;
+            return (
+              <button
+                key={zone.zone}
+                type="button"
+                onClick={() => setSelectedZone(zone)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                  isSelected
+                    ? 'bg-rose-500 text-white shadow-2xs scale-105'
+                    : 'bg-stone-100 text-stone-600 hover:bg-rose-50 hover:text-stone-900'
                 }`}
-              />
-              <span>{z.zone}</span>
-            </button>
-          ))}
+              >
+                {ruName} ({zone.score}%)
+              </button>
+            );
+          })}
         </div>
 
-        {/* Selected Zone Friendly Tip Box */}
-        {selectedZone && (
-          <div className="p-4 rounded-2xl bg-gradient-to-r from-stone-50 to-rose-50/30 border border-rose-100/80 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-stone-900 font-serif">
-                Область: {selectedZone.zone}
-              </span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white text-stone-600 border border-stone-200">
-                {selectedZone.severity === 'Optimal' ? 'В порядке' : 'Требует внимания'}
-              </span>
+        {/* Selected Zone Card */}
+        <div className="bg-gradient-to-br from-rose-50/40 via-white to-amber-50/30 rounded-2xl p-4 border border-rose-100/80 space-y-2.5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
+              <h4 className="text-sm font-bold text-stone-900">
+                Зона: {zoneNamesRu[selectedZone.zone]} • {selectedZone.metric}
+              </h4>
             </div>
 
-            <p className="text-xs text-stone-600 leading-relaxed">
-              <span className="font-semibold text-stone-800">Что заметил сканер: </span>
-              {selectedZone.observation}
-            </p>
-
-            <p className="text-xs text-rose-700 font-medium leading-relaxed bg-white/70 p-2.5 rounded-xl border border-rose-100">
-              💡 <span className="font-semibold">Что делать: </span>
-              {selectedZone.recommendation}
-            </p>
+            <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-rose-100/70 text-rose-700">
+              {selectedZone.severity === 'Optimal' ? '✨ В норме' : selectedZone.severity === 'Mild' ? '💧 Требует внимания' : '🌸 Особая забота'}
+            </span>
           </div>
-        )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-1">
+            <div className="bg-white/80 p-3 rounded-xl border border-rose-100/60 space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400">
+                Что видит Mina
+              </span>
+              <p className="text-stone-700 leading-relaxed font-medium">
+                {selectedZone.observation}
+              </p>
+            </div>
+
+            <div className="bg-white/80 p-3 rounded-xl border border-rose-100/60 space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-rose-500">
+                Совет бьюти-эксперта
+              </span>
+              <p className="text-stone-700 leading-relaxed font-medium">
+                {selectedZone.recommendation}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { SkinMetrics, SkincareRoutine, SkincareStep, SkinType, ZoneAnalysis } fr
  * Mina Dermatological Skincare Protocol Generator
  * Generates clinical AM & PM routines, active ingredient matches,
  * contraindications, and lifestyle tips tailored strictly to biometric skin metrics.
+ * 100% localized in warm, empathetic, and professional Russian.
  */
 export function generateSkincareProtocol(metrics: SkinMetrics): SkincareRoutine {
   const { skinType, hydration, sebumControl, rednessSensitivity, poreClarity, eyeAreaFatigue } = metrics;
@@ -16,295 +17,263 @@ export function generateSkincareProtocol(metrics: SkinMetrics): SkincareRoutine 
   const lifestyleTips: string[] = [];
 
   // ==========================================
-  // AM ROUTINE (Morning Protection & Balance)
+  // AM ROUTINE (Утренний уход: Защита и свежесть)
   // ==========================================
 
-  // Step 1: AM Cleanser
+  // Шаг 1: Утреннее очищение
   if (skinType === 'Dry' || skinType === 'Sensitive') {
     amSteps.push({
       order: 1,
       phase: 'Cleanse',
-      productName: 'Hydra-Soothe Milk Cleanser',
-      productType: 'Non-foaming cream cleanser with amino acids',
-      targetConcerns: ['Preserving lipid barrier', 'Preventing morning tightness'],
-      keyActives: ['Colloidal Oatmeal', 'Glycerin', 'Panthenol (B5)'],
-      usageAdvice: 'Wash gently with lukewarm water. Do not scrub; pat dry with a soft clean towel.',
+      productName: 'Мягкий очищающий крем-гель с аминокислотами',
+      productType: 'Непенящаяся деликатная эмульсия',
+      targetConcerns: ['Сохранение липидного слоя', 'Защита от чувства стянутости'],
+      keyActives: ['Пантенол (B5)', 'Растительный глицерин', 'Экстракт овса'],
+      usageAdvice: 'Умывайся чуть теплой водой. Не три лицо, а аккуратно промокни мягким хлопковым полотенцем.',
     });
   } else if (skinType === 'Oily') {
     amSteps.push({
       order: 1,
       phase: 'Cleanse',
-      productName: 'Purifying Sebum-Control Foaming Gel',
-      productType: 'Low-pH BHA foaming cleanser',
-      targetConcerns: ['Dissolving overnight sebum', 'Unclogging pores'],
-      keyActives: ['0.5% Salicylic Acid', 'Zinc PCA', 'Tea Tree Leaf Extract'],
-      usageAdvice: 'Lather for 45 seconds focusing gently on the T-zone, then rinse thoroughly.',
+      productName: 'Очищающий себорегулирующий гель с мягкой BHA',
+      productType: 'Слабокислотная освежающая пенка (pH 5.5)',
+      targetConcerns: ['Удаление ночного себума', 'Очищение и сужение пор'],
+      keyActives: ['Салициловая кислота 0.5%', 'Цинк PCA', 'Экстракт чайного дерева'],
+      usageAdvice: 'Вспень горошину геля во влажных ладонях, помассируй Т-зону 30 секунд и смой прохладной водой.',
     });
   } else {
     amSteps.push({
       order: 1,
       phase: 'Cleanse',
-      productName: 'Gentle Botanical Balancing Gel',
-      productType: 'pH 5.5 daily gentle cleanser',
-      targetConcerns: ['Daily freshness', 'pH balance'],
-      keyActives: ['Green Tea Extract', 'Allantoin', 'Centella Asiatica'],
-      usageAdvice: 'Apply a dime-sized amount to wet hands, massage gently, and rinse clean.',
+      productName: 'Балансирующий гель с экстрактом зеленого чая',
+      productType: 'Мягкий ежедневный гель для умывания',
+      targetConcerns: ['Утренняя свежесть', 'Поддержание естественного pH'],
+      keyActives: ['Экстракт центеллы азиатской', 'Зеленый чай', 'Аллантоин'],
+      usageAdvice: 'Нанеси на влажные ладони, мягко распредели круговыми движениями и смой теплой водой.',
     });
   }
 
-  // Step 2: AM Toner / Essence
-  if (hydration < 50 || skinType === 'Dry') {
+  // Шаг 2: Тонизирование и гидратация
+  if (hydration < 60 || skinType === 'Dry' || skinType === 'Sensitive') {
     amSteps.push({
       order: 2,
       phase: 'Tone & Prep',
-      productName: 'Multi-Depth Hyaluronic Essence Toner',
-      productType: 'Viscous plumping hydrating toner',
-      targetConcerns: ['Dehydration lines', 'Deep moisture saturation'],
-      keyActives: ['5 Molecular Weights of Hyaluronic Acid', 'Beta-Glucan'],
-      usageAdvice: 'Press 2–3 layers gently into the skin using palms until completely absorbed.',
-    });
-  } else if (rednessSensitivity < 55 || skinType === 'Sensitive') {
-    amSteps.push({
-      order: 2,
-      phase: 'Tone & Prep',
-      productName: 'Cica Calm Calming Mist Toner',
-      productType: 'Soothing barrier-relief toner',
-      targetConcerns: ['Erythema reduction', 'Cooling reactive skin'],
-      keyActives: ['80% Centella Asiatica Water', 'Madecassoside', 'Artemisia'],
-      usageAdvice: 'Mist evenly across face and neck or press gently with fingers.',
+      productName: 'Глубоко увлажняющий тонер-эссенция с 5 видами гиалуроновой кислоты',
+      productType: 'Шелковистый увлажняющий тонер',
+      targetConcerns: ['Мгновенное насыщение влагой', 'Смягчение эпидермиса'],
+      keyActives: ['Гиалуроновая кислота (микро и макро)', 'Бета-глюкан', 'Пантенол'],
+      usageAdvice: 'Нанеси несколько капель прямо на ладони и аккуратно «вбей» подушечками пальцев в кожу лица и шеи.',
     });
   } else {
     amSteps.push({
       order: 2,
       phase: 'Tone & Prep',
-      productName: 'Pore Clarifying Refreshing Toner',
-      productType: 'Balancing botanical toner',
-      targetConcerns: ['Refining skin texture', 'Antioxidant prep'],
-      keyActives: ['Heartleaf Extract', 'Niacinamide 2%', 'Witch Hazel Leaf'],
-      usageAdvice: 'Sweep lightly with a cotton pad or pat in with hands.',
+      productName: 'Освежающий балансирующий тонер с центеллой и ниацинамидом',
+      productType: 'Легкий успокаивающий водный тонер',
+      targetConcerns: ['Нормализация водного баланса', 'Ровный микрорельеф'],
+      keyActives: ['Гидролат центеллы 84%', 'Ниацинамид 2%', 'Экстракт ромашки'],
+      usageAdvice: 'Протри лицо смоченным ватным диском или мягко приложи ладони к лицу для впитывания.',
     });
   }
 
-  // Step 3: AM Targeted Treatment / Serum
-  if (poreClarity < 60 || sebumControl < 50) {
+  // Шаг 3: Активная утренняя сыворотка
+  if (rednessSensitivity < 60 || skinType === 'Sensitive') {
     amSteps.push({
       order: 3,
       phase: 'Target & Treat',
-      productName: 'Niacinamide 5% + Zinc Barrier Serum',
-      productType: 'Oil-regulation & pore-refining serum',
-      targetConcerns: ['Excess sebum', 'Pore enlargement', 'Uneven texture'],
-      keyActives: ['5% Pure Niacinamide', '1% Zinc PCA', 'Hyaluronic Acid'],
-      usageAdvice: 'Dispense 3–4 drops onto forehead and cheeks; smooth evenly without tugging.',
+      productName: 'Успокаивающая Cica-сыворотка с мадекассосидом',
+      productType: 'Барьерный успокаивающий концентрат',
+      targetConcerns: ['Снятие покраснений', 'Укрепление хрупких капилляров'],
+      keyActives: ['Мадекассосид', 'Центелла азиатская', 'Пантенол 5%'],
+      usageAdvice: 'Распредели 3–4 капли по щекам и крыльям носа до полного комфортного впитывания.',
     });
-  } else if (eyeAreaFatigue < 55) {
+  } else if (sebumControl < 60 || skinType === 'Oily') {
     amSteps.push({
       order: 3,
       phase: 'Target & Treat',
-      productName: 'Vitamin C 10% Radiance + Eye Peptide Serum',
-      productType: 'Brightening antioxidant concentrate',
-      targetConcerns: ['Dullness', 'Dark circles', 'Environmental protection'],
-      keyActives: ['10% Stabilized Vitamin C (3-O-Ethyl Ascorbic Acid)', 'Caffeine', 'Ferulic Acid'],
-      usageAdvice: 'Apply around orbital bone and face before heavier creams.',
+      productName: 'Себорегулирующая сыворотка с ниацинамидом и цинком',
+      productType: 'Матирующий легкий серум',
+      targetConcerns: ['Контроль блеска в течение дня', 'Сужение пор'],
+      keyActives: ['Ниацинамид 5%', 'Цинк 1%', 'Экстракт коры белой ивы'],
+      usageAdvice: 'Нанеси тонким слоем на Т-зону и лоб перед нанесением увлажняющего крема.',
     });
   } else {
     amSteps.push({
       order: 3,
       phase: 'Target & Treat',
-      productName: 'Copper Peptide Firming Elixir',
-      productType: 'Rejuvenating collagen support serum',
-      targetConcerns: ['Skin firmness', 'Cellular recovery'],
-      keyActives: ['Copper Tripeptide-1', 'Adenosine', 'Niacinamide'],
-      usageAdvice: 'Pat 3 drops into face and neck using upward strokes.',
+      productName: 'Антиоксидантная сыворотка-сияние с витамином C и феруловой кислотой',
+      productType: 'Осветляющая сыворотка для ровного тона',
+      targetConcerns: ['Защита от смога и фотостарения', 'Естественный Glass-Skin глянец'],
+      keyActives: ['Стабильный витамин C (E-AA)', 'Феруловая кислота', 'Витамин E'],
+      usageAdvice: '3 капли утром придадут коже фарфоровое свечение и усилят действие солнцезащитного крема.',
     });
   }
 
-  // Step 4: AM Moisturizer
-  if (skinType === 'Oily') {
+  // Шаг 4: Дневной увлажняющий крем
+  if (skinType === 'Oily' || sebumControl < 50) {
     amSteps.push({
       order: 4,
       phase: 'Hydrate & Seal',
-      productName: 'Aqua Gel Water-Burst Hydrator',
-      productType: 'Oil-free weightless gel moisturizer',
-      targetConcerns: ['Weightless hydration', 'Shine-free finish'],
-      keyActives: ['Polyglutamic Acid', 'Birch Sap Extract', 'Squalane'],
-      usageAdvice: 'Apply a pea-sized amount evenly. Absorbs instantly with a natural matte finish.',
+      productName: 'Невесомый крем-гель без масел (Oil-Free Water Gel)',
+      productType: 'Матирующий крем-флюид',
+      targetConcerns: ['Увлажнение без липкости', 'Бархатистый матовый финиш'],
+      keyActives: ['Сок березы', 'Гиалуронат натрия', 'Экстракт центеллы'],
+      usageAdvice: 'Легкий горошины хватит на все лицо. Быстро впитывается и служит идеальной базой под макияж.',
     });
   } else {
     amSteps.push({
       order: 4,
       phase: 'Hydrate & Seal',
-      productName: 'Ceramide Barrier Recovery Emulsion',
-      productType: 'Lightweight lipid-restoring fluid',
-      targetConcerns: ['Trans-epidermal water loss', 'Strengthening lipid matrix'],
-      keyActives: ['Ceramides NP/AP/EOP', 'Cholesterol', 'Fatty Acids (3:1:1 Ratio)'],
-      usageAdvice: 'Smooth over face and neck until a soft protective moisture veil forms.',
+      productName: 'Восстанавливающий барьерный крем-шелк с церамидами',
+      productType: 'Шелковистый ламеллярный крем',
+      targetConcerns: ['Удержание влаги весь день', 'Защита от кондиционеров и ветра'],
+      keyActives: ['Церамиды NP, AP, EOP', 'Сквалан', 'Фитосфингозин'],
+      usageAdvice: 'Разогрей крем между пальцами и мягкими прижимающими движениями нанеси на лицо и шею.',
     });
   }
 
-  // Step 5: AM Sun Protection (Non-Negotiable)
+  // Шаг 5: Невесомая защита от солнца SPF 50+
   amSteps.push({
     order: 5,
     phase: 'Sun Defense',
-    productName: 'Broad-Spectrum Invisible Shield Fluid SPF 50+ PA++++',
-    productType: 'Hybrid photostable UV fluid',
-    targetConcerns: ['Photo-aging prevention', 'UV damage', 'Pigmentation defense'],
-    keyActives: ['Uvinul A Plus', 'Tinosorb S', 'Centella Extract'],
-    usageAdvice: 'Apply two full finger-lengths as the final morning step 15 minutes before sun exposure.',
+    productName: 'Невидимый солнцезащитный флюид SPF 50+ PA++++',
+    productType: 'Увлажняющий санскрин на современных химических фильтрах нового поколения',
+    targetConcerns: ['Профилактика пигментации', 'Защита от UVA/UVB лучей и фотостарения'],
+    keyActives: ['Uvinul A Plus', 'Tinosorb S', 'Ниацинамид 2%'],
+    usageAdvice: 'Наноси правилом двух пальцев за 15 минут до выхода. Не белит, не забивает поры и оставляет красивое свечение.',
   });
 
   // ==========================================
-  // PM ROUTINE (Night Restoration & Repair)
+  // PM ROUTINE (Вечерний уход: Восстановление и релакс)
   // ==========================================
 
-  // Step 1: PM Double Cleanse (Oil / Balm)
+  // Шаг 1: Первый этап демакияжа (Гидрофильное очищение)
   pmSteps.push({
     order: 1,
     phase: 'Cleanse',
-    productName: 'Melt-Away Botanical Cleansing Oil',
-    productType: 'Emulsifying evening first cleanse',
-    targetConcerns: ['Dissolving SPF and airborne particulate pollution', 'Sebum breakdown'],
-    keyActives: ['Jojoba Seed Oil', 'Sunflower Seed Oil', 'Vitamin E'],
-    usageAdvice: 'Massage onto dry skin for 60 seconds. Add warm water to emulsify into milky wash, then rinse.',
+    productName: 'Гидрофильный бальзам с маслом жожоба и центеллой',
+    productType: 'Тающий очищающий щербет-бальзам',
+    targetConcerns: ['Растворение стойкого SPF и косметики', 'Глубокое очищение пор от пыли'],
+    keyActives: ['Масло жожоба', 'Масло рисовых отрубей', 'Экстракт центеллы'],
+    usageAdvice: 'Нанеси сухими руками на сухое лицо, помассируй 1 минуту, добавь каплю воды до образования белого молочка и смой.',
   });
 
-  // Step 2: PM Second Cleanse
+  // Шаг 2: Второй этап очищения
   pmSteps.push({
     order: 2,
     phase: 'Cleanse',
-    productName: 'Ultra-Mild Rebalancing Gel Wash',
-    productType: 'Sulfate-free micro-bubble cleanser',
-    targetConcerns: ['Gentle residue removal without stripping'],
-    keyActives: ['Sodium Cocoyl Isethionate', 'Allantoin', 'Chamomile Extract'],
-    usageAdvice: 'Follow immediately after oil cleanser on damp skin, rinse thoroughly.',
+    productName: 'Нежная пенка для умывания с физиологическим pH 5.5',
+    productType: 'Успокаивающая пенка с пантенолом',
+    targetConcerns: ['Финальное чистое умывание', 'Сохранение естественной микрофлоры'],
+    keyActives: ['Аминокислоты яблока', 'Аллантоин', 'Пантенол'],
+    usageAdvice: 'Взбей нежную пену в ладонях, мягко смой остатки гидрофильного масла и промокни полотенцем.',
   });
 
-  // Step 3: PM Actives / Overnight Cell Renewal
-  if (skinType === 'Oily' || poreClarity < 55) {
+  // Шаг 3: Вечернее тонизирование
+  pmSteps.push({
+    order: 3,
+    phase: 'Tone & Prep',
+    productName: 'Восстанавливающий молочный тонер-комфорт',
+    productType: 'Двухфазный питательный тонер',
+    targetConcerns: ['Восстановление гидробаланса после дня', 'Мягкость и бархатистость'],
+    keyActives: ['Экстракт риса 77%', 'Керамиды', 'Ниацинамид'],
+    usageAdvice: 'Встряхни флакон, нанеси ладонями в 2 тонких слоя для эффекта упругой, напитанной кожи.',
+  });
+
+  // Шаг 4: Ночной интенсивный уход
+  if (poreClarity < 60 || sebumControl < 50) {
     pmSteps.push({
-      order: 3,
+      order: 4,
       phase: 'Target & Treat',
-      productName: '2% BHA Pore Decongesting Liquid',
-      productType: 'Leave-on chemical exfoliant',
-      targetConcerns: ['Blackheads', 'Excess keratin buildup', 'Sebaceous filaments'],
-      keyActives: ['2% Salicylic Acid', 'Green Tea Extract'],
-      usageAdvice: 'Use 2–3 evenings per week. Apply with fingers; do not rinse off.',
+      productName: 'Ночная сыворотка с салициловой кислотой 2% и цинком',
+      productType: 'Эксфолиирующий очищающий ночной концентрат',
+      targetConcerns: ['Растворение сальных пробок', 'Осветление черных точек'],
+      keyActives: ['Бетаин салицилат 2%', 'Цинк PCA', 'Центелла'],
+      usageAdvice: 'Используй 2-3 раза в неделю на ночь на сухую кожу Т-зоны. Избегай зоны вокруг глаз.',
     });
-  } else if (metrics.firmnessElasticity < 65 || metrics.overallHealthScore < 70) {
+  } else if (skinType === 'Sensitive' || rednessSensitivity < 60) {
     pmSteps.push({
-      order: 3,
+      order: 4,
       phase: 'Target & Treat',
-      productName: 'Encapsulated Retinol 0.3% Repair Serum',
-      productType: 'Slow-release cellular turnover treatment',
-      targetConcerns: ['Texture smoothing', 'Collagen density', 'Cellular turnover'],
-      keyActives: ['0.3% Micro-encapsulated Retinol', 'Bakuchiol', 'Peptides'],
-      usageAdvice: 'Apply a pea-sized amount to completely dry skin at night. Start 2 nights per week.',
+      productName: 'Интенсивная барьерная сыворотка с бифидобактериями и Cica',
+      productType: 'Ночной регенерирующий концентрат',
+      targetConcerns: ['Снятие дневного воспаления', 'Укрепление микробиома кожи'],
+      keyActives: ['Лизат бифидобактерий', 'Мадекассосид', 'Пептидный комплекс'],
+      usageAdvice: 'Нанеси 4 капли на все лицо мягкими разглаживающими движениями перед сном.',
     });
   } else {
     pmSteps.push({
-      order: 3,
+      order: 4,
       phase: 'Target & Treat',
-      productName: 'Bifida Ferment Night Recovery Ampoule',
-      productType: 'Microbiome restoration concentrate',
-      targetConcerns: ['Overnight barrier regeneration', 'Microbiome diversity'],
-      keyActives: ['Bifida Ferment Lysate', 'Lactobacillus', 'Hyaluronic Acid'],
-      usageAdvice: 'Pat 1 full dropper gently into face and neck.',
+      productName: 'Омолаживающая пептидная сыворотка Multi-Peptide Glow',
+      productType: 'Укрепляющий антивозрастной эликсир',
+      targetConcerns: ['Повышение эластичности', 'Сглаживание мимических линий'],
+      keyActives: ['Matrixyl 3000', 'Медные пептиды', 'Гиалуроновая кислота'],
+      usageAdvice: 'Распредели по массажным линиям от центра лица к периферии и шее.',
     });
   }
 
-  // Step 4: PM Nourishing Barrier Cream
+  // Шаг 5: Ночной питательный крем-бальзам
   pmSteps.push({
-    order: 4,
+    order: 5,
     phase: 'Hydrate & Seal',
-    productName: 'Overnight Intensive Barrier Balm',
-    productType: 'Rich occlusive night recovery cream',
-    targetConcerns: ['Locking in nighttime actives', 'Preventing overnight moisture evaporation'],
-    keyActives: ['5 Ceramides Complex', 'Shea Butter', 'Madecassoside', 'Squalane'],
-    usageAdvice: 'Warm between fingertips and gently press into skin as the final nighttime step.',
+    productName: 'Ночной крем глубокого восстановления с церамидами и скваланом',
+    productType: 'Питательный барьерный крем «вторая кожа»',
+    targetConcerns: ['Ночная регенерация клеток', 'Пробуждение со свежей отдохнувшей кожей'],
+    keyActives: ['Комплекс 5 церамидов', 'Сквалан сахарного тростника', 'Холестерол'],
+    usageAdvice: 'Нанеси за 30 минут до сна щедрым комфортным слоем. Утром кожа будет мягкой, гладкой и напитанной.',
   });
 
   // ==========================================
-  // INGREDIENTS TO SEEK & AVOID
+  // Твои супер-ингредиенты и чего избегать
   // ==========================================
+  keyIngredients.push(
+    {
+      ingredient: 'Центелла азиатская (Cica)',
+      benefit: 'Быстро успокаивает покраснения, ускоряет регенерацию и снимает ощущение жара.',
+    },
+    {
+      ingredient: 'Ниацинамид (Витамин B3, 2–5%)',
+      benefit: 'Нормализует выработку кожного сала, мягко сужает поры и стирает следы усталости.',
+    },
+    {
+      ingredient: 'Церамиды NP / AP / EOP',
+      benefit: 'Скрепляют клетки защитного барьера подобно цементу, запирая драгоценную влагу внутри.',
+    },
+    {
+      ingredient: 'Гиалуроновая кислота разной массы',
+      benefit: 'Притягивает и удерживает до 1000 раз больше своего веса в воде, создавая сочный объем.',
+    }
+  );
 
-  if (hydration < 60) {
-    keyIngredients.push({
-      ingredient: 'Hyaluronic Acid (Multi-weight)',
-      benefit: 'Draws moisture 1000x its weight into deeper epidermal layers.',
-    });
-    keyIngredients.push({
-      ingredient: 'Beta-Glucan',
-      benefit: '20% more hydrating than hyaluronic acid with deep soothing properties.',
-    });
-  }
+  ingredientsToAvoid.push(
+    {
+      ingredient: 'Денатурированный спирт (Alcohol Denat)',
+      benefit: '',
+      reason: 'Мгновенно обезвоживает верхний слой кожи и стимулирует сальные железы выделять еще больше жира.',
+    },
+    {
+      ingredient: 'Агрессивные сульфаты (SLS / SLES)',
+      benefit: '',
+      reason: 'Смывают защитную липидную пленку, приводя к раздражению, сухости и ранним морщинкам.',
+    },
+    {
+      ingredient: 'Тяжелые комедогенные минеральные масла',
+      benefit: '',
+      reason: 'Создают воздухонепроницаемую пленку и провоцируют закупорку протоков сальных желез.',
+    }
+  );
 
-  if (rednessSensitivity < 60) {
-    keyIngredients.push({
-      ingredient: 'Centella Asiatica (Cica / Madecassoside)',
-      benefit: 'Rapidly calms micro-inflammation and reinforces vascular capillary walls.',
-    });
-    keyIngredients.push({
-      ingredient: 'Panthenol (Pro-Vitamin B5)',
-      benefit: 'Accelerates epidermal wound healing and reinforces stratum corneum.',
-    });
-  }
+  weeklyRituals.push(
+    '1 раз в неделю: Мягкий энзимный пилинг-пудра с папаином для гладкого Glass-Skin сияния.',
+    '2 раза в неделю: Успокаивающая тканевая маска с центеллой после душа для глубокого релакса.'
+  );
 
-  if (sebumControl < 60) {
-    keyIngredients.push({
-      ingredient: 'Niacinamide (Vitamin B3)',
-      benefit: 'Normalizes sebaceous gland excretion and tightens lax pore walls.',
-    });
-    keyIngredients.push({
-      ingredient: 'Zinc PCA',
-      benefit: 'Inhibits 5-alpha reductase to control shine and soothe blemishes.',
-    });
-  }
-
-  keyIngredients.push({
-    ingredient: 'Ceramides (NP, AP, EOP)',
-    benefit: 'The essential building blocks of your natural intercellular lipid glue.',
-  });
-
-  // Contraindications / Ingredients to Avoid
-  if (skinType === 'Sensitive' || rednessSensitivity < 55) {
-    ingredientsToAvoid.push({
-      ingredient: 'Denatured Alcohol (Alcohol Denat / SD Alcohol)',
-      reason: 'Strips lipid barrier causing rebound oiliness, burning, and severe redness.',
-    });
-    ingredientsToAvoid.push({
-      ingredient: 'Synthetic Fragrances & Essential Oils (Linalool, Limonene)',
-      reason: 'Top causes of contact dermatitis and sensitization in compromised barriers.',
-    });
-  }
-
-  if (skinType === 'Oily' || poreClarity < 60) {
-    ingredientsToAvoid.push({
-      ingredient: 'Isopropyl Myristate & Heavy Coconut Oil',
-      reason: 'High comedogenic rating (4–5); traps sebum and leads to congestion.',
-    });
-  }
-
-  ingredientsToAvoid.push({
-    ingredient: 'Physical Walnut / Apricot Shell Scrubs',
-    reason: 'Causes microscopic epidermal tears; replace with gentle enzymatic or BHA exfoliants.',
-  });
-
-  // ==========================================
-  // WEEKLY RITUALS & LIFESTYLE ADVICE
-  // ==========================================
-
-  if (skinType === 'Oily' || poreClarity < 60) {
-    weeklyRituals.push('Kaolin & Bentonite Clay Clarifying Mask — once a week for 10 minutes.');
-  }
-  if (skinType === 'Dry' || hydration < 55) {
-    weeklyRituals.push('Overnight Sheet Mask with Panthenol & Squalane — 2 times weekly.');
-  }
-  weeklyRituals.push('Gentle enzymatic exfoliation (Papain/Bromelain) — every Sunday evening.');
-  weeklyRituals.push('Silk or satin pillowcase rotation — wash every 3–4 days to prevent bacterial transfer.');
-
-  lifestyleTips.push('Target 2.2L–2.5L daily water intake to maintain cellular turgor from within.');
-  lifestyleTips.push('Maintain bedroom humidity between 45%–55%, especially in air-conditioned environments.');
-  lifestyleTips.push('Minimize touching your face or resting your smartphone directly against your cheek.');
-  lifestyleTips.push('Ensure 7.5–8 hours of uninterrupted sleep for nighttime growth hormone peak repair.');
+  lifestyleTips.push(
+    'Пей не менее 1.5–2 литров чистой теплой воды в день для клеточной гидратации.',
+    'Меняй наволочку на шелковую каждые 3–4 дня — это предотвращает бактериальные высыпания и заломы.',
+    'Используй увлажнитель воздуха в комнате, особенно при включенном кондиционере или отоплении.'
+  );
 
   return {
     am: amSteps,
@@ -317,104 +286,98 @@ export function generateSkincareProtocol(metrics: SkinMetrics): SkincareRoutine 
 }
 
 /**
- * 4 Curated Preset Profiles for 1-Click Instant Demo Testing
+ * Предустановленные профили Mina для мгновенного ознакомления
  */
-export const MINA_PRESETS: {
-  id: string;
-  title: string;
-  subtitle: string;
-  tag: string;
-  avatarColor: string;
-  previewMetrics: {
-    skinType: SkinType;
-    score: number;
-    primaryConcern: string;
-  };
-  sampleMetrics: SkinMetrics;
-}[] = [
+export const MINA_PRESETS = [
   {
-    id: 'preset-combination-vietnam',
-    title: 'Combination & Urban Exposure',
-    subtitle: 'Inspired by Hanoi / Saigon climate profile',
-    tag: 'Popular',
+    id: 'preset-combination-urban',
+    title: 'Комбинированная и стресс',
+    subtitle: 'Блеск в Т-зоне к середине дня и сухость щек от кондиционеров',
+    tag: '🌿 Баланс',
+    badgeText: 'Популярный типаж',
+    icon: '🌿',
+    avatarBg: 'bg-gradient-to-tr from-amber-100 via-rose-100 to-teal-100 text-stone-700',
     avatarColor: 'from-amber-400 to-rose-400',
     previewMetrics: {
-      skinType: 'Combination',
+      skinType: 'Combination' as SkinType,
       score: 74,
-      primaryConcern: 'T-Zone shine & enlarged pores',
+      primaryConcern: 'Баланс Т-зоны и легкое увлажнение щек',
     },
     sampleMetrics: {
       overallHealthScore: 74,
-      skinType: 'Combination',
-      primaryConcern: 'T-Zone oiliness & cheek dehydration',
-      secondaryConcern: 'Mild pore congestion',
-      hydration: 62,
+      skinType: 'Combination' as SkinType,
+      primaryConcern: 'Блеск в Т-зоне и стянутость щек',
+      secondaryConcern: 'Защита от городской пыли и стресса',
+      hydration: 68,
       sebumControl: 54,
-      barrierHealth: 78,
-      poreClarity: 58,
-      rednessSensitivity: 72,
+      barrierHealth: 76,
+      poreClarity: 62,
+      rednessSensitivity: 78,
       firmnessElasticity: 82,
       eyeAreaFatigue: 68,
       zones: [
         {
-          zone: 'Forehead',
-          metric: 'Excess Sebum',
-          score: 55,
-          severity: 'Mild',
-          observation: 'Noticeable sheen with minor texture irregularities.',
-          recommendation: 'Incorporate 5% Niacinamide in morning routine.',
+          zone: 'Forehead' as const,
+          metric: 'Баланс блеска',
+          score: 58,
+          severity: 'Mild' as const,
+          observation: 'Легкий блеск на лбу к середине дня, поры в нормальном тонусе.',
+          recommendation: 'Используй легкий утренний флюид с ниацинамидом 2%.',
         },
         {
-          zone: 'T-Zone',
-          metric: 'Pore Congestion',
+          zone: 'T-Zone' as const,
+          metric: 'Чистота пор',
           score: 52,
-          severity: 'Needs Attention',
-          observation: 'Enlarged pores around nasal bridge with mild sebum buildup.',
-          recommendation: 'Use gentle 2% BHA treatment twice weekly.',
+          severity: 'Mild' as const,
+          observation: 'Небольшие черные точки на крыльях носа и слегка заметные поры.',
+          recommendation: 'Мягкое вечернее очищение гидрофильным маслом + BHA 2 раза в неделю.',
         },
         {
-          zone: 'Cheeks',
-          metric: 'Moisture Level',
-          score: 80,
-          severity: 'Optimal',
-          observation: 'Smooth texture, balanced lipid levels, minimal redness.',
-          recommendation: 'Maintain lightweight ceramide protection.',
+          zone: 'Cheeks' as const,
+          metric: 'Влажность щек',
+          score: 76,
+          severity: 'Optimal' as const,
+          observation: 'Кожа на щеках спокойная, но требует регулярной легкой гидратации.',
+          recommendation: 'Увлажняющий тонер с гиалуроновой кислотой в 2 слоя.',
         },
         {
-          zone: 'Under-Eye',
-          metric: 'Micro-Circulation',
-          score: 66,
-          severity: 'Mild',
-          observation: 'Mild vascular darkness from screen fatigue.',
-          recommendation: 'Apply caffeine-infused eye gel morning and night.',
+          zone: 'Under-Eye' as const,
+          metric: 'Свежесть взгляда',
+          score: 68,
+          severity: 'Mild' as const,
+          observation: 'Небольшие следы недосыпа и сухость от гаджетов.',
+          recommendation: 'Освежающий крем-гель с пептидами и кофеином утром.',
         },
         {
-          zone: 'Chin',
-          metric: 'Barrier Integrity',
-          score: 75,
-          severity: 'Optimal',
-          observation: 'Calm skin with no active inflammatory lesions.',
-          recommendation: 'Ensure thorough double-cleansing in the evening.',
+          zone: 'Chin' as const,
+          metric: 'Защитный барьер',
+          score: 78,
+          severity: 'Optimal' as const,
+          observation: 'Здоровый барьер, воспалений и шелушений не обнаружено.',
+          recommendation: 'Поддерживай уход барьерным ночным кремом с церамидами.',
         },
       ],
     },
   },
   {
     id: 'preset-sensitive-cica',
-    title: 'Dehydrated & Reactive Barrier',
-    subtitle: 'Sensitivity & capillary redness',
-    tag: 'Sensitive',
+    title: 'Чувствительная и сухая',
+    subtitle: 'Ощущение стянутости после умывания, реакция на холод и ветер',
+    tag: '🌸 Барьер',
+    badgeText: 'Требует заботы',
+    icon: '🌸',
+    avatarBg: 'bg-gradient-to-tr from-rose-100 via-pink-100 to-amber-50 text-rose-800',
     avatarColor: 'from-rose-400 to-pink-500',
     previewMetrics: {
-      skinType: 'Sensitive',
+      skinType: 'Sensitive' as SkinType,
       score: 61,
-      primaryConcern: 'Erythema & compromised barrier',
+      primaryConcern: 'Успокаивающий уход и снятие покраснений',
     },
     sampleMetrics: {
       overallHealthScore: 61,
-      skinType: 'Sensitive',
-      primaryConcern: 'Capillary redness & tight moisture barrier',
-      secondaryConcern: 'Reactivity to environmental triggers',
+      skinType: 'Sensitive' as SkinType,
+      primaryConcern: 'Снятие покраснений и восстановление барьера',
+      secondaryConcern: 'Глубокая защита от чувства стянутости',
       hydration: 44,
       sebumControl: 68,
       barrierHealth: 51,
@@ -424,64 +387,67 @@ export const MINA_PRESETS: {
       eyeAreaFatigue: 62,
       zones: [
         {
-          zone: 'Forehead',
-          metric: 'Dehydration Lines',
+          zone: 'Forehead' as const,
+          metric: 'Уровень влаги',
           score: 58,
-          severity: 'Mild',
-          observation: 'Superficial dryness lines when expressive.',
-          recommendation: 'Layer multiple applications of hydrating essence.',
+          severity: 'Mild' as const,
+          observation: 'Мелкие линии поверхностной сухости при мимике.',
+          recommendation: 'Успокаивающая эссенция с центеллой и пантенолом.',
         },
         {
-          zone: 'T-Zone',
-          metric: 'Lipid Balance',
+          zone: 'T-Zone' as const,
+          metric: 'Липидный баланс',
           score: 70,
-          severity: 'Optimal',
-          observation: 'No excessive sebum; slightly delicate.',
-          recommendation: 'Avoid harsh foaming cleansers.',
+          severity: 'Optimal' as const,
+          observation: 'Поры чистые, избыточного жирного блеска нет.',
+          recommendation: 'Избегай агрессивных сульфатных пенок для умывания.',
         },
         {
-          zone: 'Cheeks',
-          metric: 'Capillary Reactivity',
+          zone: 'Cheeks' as const,
+          metric: 'Чувствительность щек',
           score: 42,
-          severity: 'Needs Attention',
-          observation: 'Flushed erythema with visible capillary sensitivity.',
-          recommendation: 'High-concentration Centella Asiatica & Panthenol.',
+          severity: 'Needs Attention' as const,
+          observation: 'Заметный румянец и хрупкие сосуды, реагирующие на перепад температур.',
+          recommendation: 'Сыворотка с высокой концентрацией Cica (центеллы) и мадекассосида.',
         },
         {
-          zone: 'Under-Eye',
-          metric: 'Thinning Epidermis',
+          zone: 'Under-Eye' as const,
+          metric: 'Тонкая кожа век',
           score: 55,
-          severity: 'Mild',
-          observation: 'Skin is delicate and susceptible to dryness.',
-          recommendation: 'Seal with fragrance-free squalane balm.',
+          severity: 'Mild' as const,
+          observation: 'Очень нежная зона, склонная к сухости.',
+          recommendation: 'Питательный бальзам для век без отдушек со скваланом.',
         },
         {
-          zone: 'Chin',
-          metric: 'Micro-Peeling',
+          zone: 'Chin' as const,
+          metric: 'Шелушения',
           score: 50,
-          severity: 'Needs Attention',
-          observation: 'Localized flaking around perimeter.',
-          recommendation: 'Apply ceramide repair cream generously.',
+          severity: 'Needs Attention' as const,
+          observation: 'Локальная сухость и стянутость по контуру подбородка.',
+          recommendation: 'Наноси восстанавливающий церамидный крем густым слоем на ночь.',
         },
       ],
     },
   },
   {
     id: 'preset-oily-blemish',
-    title: 'Oily & Blemish-Prone',
-    subtitle: 'High sebum excretion & active congestion',
-    tag: 'Clarifying',
+    title: 'Склонная к блеску и порам',
+    subtitle: 'Активный себум в Т-зоне, расширенные поры и следы постакне',
+    tag: '🫧 Матовость',
+    badgeText: 'Очищение и баланс',
+    icon: '🫧',
+    avatarBg: 'bg-gradient-to-tr from-teal-100 via-emerald-100 to-sky-100 text-teal-800',
     avatarColor: 'from-emerald-400 to-teal-500',
     previewMetrics: {
-      skinType: 'Oily',
+      skinType: 'Oily' as SkinType,
       score: 65,
-      primaryConcern: 'Active sebum overproduction & blackheads',
+      primaryConcern: 'Деликатное сужение пор и контроль себума',
     },
     sampleMetrics: {
       overallHealthScore: 65,
-      skinType: 'Oily',
-      primaryConcern: 'Excessive sebaceous excretion',
-      secondaryConcern: 'Pore enlargement & oxidative blackheads',
+      skinType: 'Oily' as SkinType,
+      primaryConcern: 'Контроль жирного блеска и чистота пор',
+      secondaryConcern: 'Сглаживание микрорельефа и следов постакне',
       hydration: 55,
       sebumControl: 42,
       barrierHealth: 72,
@@ -491,64 +457,67 @@ export const MINA_PRESETS: {
       eyeAreaFatigue: 75,
       zones: [
         {
-          zone: 'Forehead',
-          metric: 'Sebum Production',
+          zone: 'Forehead' as const,
+          metric: 'Выработка себума',
           score: 45,
-          severity: 'Needs Attention',
-          observation: 'Persistent midday shine across entire frontal plane.',
-          recommendation: 'Zinc PCA serum and oil-free hydrator.',
+          severity: 'Needs Attention' as const,
+          observation: 'Заметный блеск уже к середине рабочего дня.',
+          recommendation: 'Сыворотка с Цинком PCA и ниацинамидом для бархатного финиша.',
         },
         {
-          zone: 'T-Zone',
-          metric: 'Pore Congestion',
+          zone: 'T-Zone' as const,
+          metric: 'Чистота пор на носу',
           score: 38,
-          severity: 'Needs Attention',
-          observation: 'Open comedones and pronounced pores on nose.',
-          recommendation: 'Daily gentle 2% Salicylic Acid wash.',
+          severity: 'Needs Attention' as const,
+          observation: 'Черные точки и расширенные поры на спинке носа.',
+          recommendation: 'Ежедневное мягкое очищение салициловой кислотой BHA 0.5%.',
         },
         {
-          zone: 'Cheeks',
-          metric: 'Texture Uniformity',
+          zone: 'Cheeks' as const,
+          metric: 'Ровность тона',
           score: 65,
-          severity: 'Mild',
-          observation: 'Occasional post-inflammatory spots.',
-          recommendation: 'Niacinamide to fade discoloration.',
+          severity: 'Mild' as const,
+          observation: 'Небольшие следы после старых воспалений.',
+          recommendation: 'Ниацинамид 5% ускорит осветление пятнышек постакне.',
         },
         {
-          zone: 'Under-Eye',
-          metric: 'Restfulness',
+          zone: 'Under-Eye' as const,
+          metric: 'Свежесть взгляда',
           score: 78,
-          severity: 'Optimal',
-          observation: 'Good elasticity and minimal dark pigmentation.',
-          recommendation: 'Maintain lightweight antioxidant eye hydration.',
+          severity: 'Optimal' as const,
+          observation: 'Кожа вокруг глаз в отличном тонусе.',
+          recommendation: 'Легкий увлажняющий гель с антиоксидантами.',
         },
         {
-          zone: 'Chin',
-          metric: 'Hormonal Congestion',
+          zone: 'Chin' as const,
+          metric: 'Баланс подбородка',
           score: 48,
-          severity: 'Needs Attention',
-          observation: 'Sub-surface micro-cysts along jawline.',
-          recommendation: 'Spot treatment with Azelaic Acid.',
+          severity: 'Needs Attention' as const,
+          observation: 'Склонность к закрытым комедонам вдоль линии челюсти.',
+          recommendation: 'Точечное применение азелаиновой кислоты на ночь.',
         },
       ],
     },
   },
   {
     id: 'preset-radiant-balanced',
-    title: 'Radiant & Balanced Glass Skin',
-    subtitle: 'Healthy lipid barrier & high hydration',
-    tag: 'Optimal',
+    title: 'Сияющая Glass Skin',
+    subtitle: 'Здоровый барьер, ровный фарфоровый тон и естественный глянец',
+    tag: '✨ Сияние',
+    badgeText: 'Идеальный баланс',
+    icon: '✨',
+    avatarBg: 'bg-gradient-to-tr from-purple-100 via-rose-100 to-amber-100 text-purple-800',
     avatarColor: 'from-purple-400 to-indigo-500',
     previewMetrics: {
-      skinType: 'Normal',
+      skinType: 'Normal' as SkinType,
       score: 89,
-      primaryConcern: 'Maintenance & antioxidant defense',
+      primaryConcern: 'Поддержание антиоксидантного сияния',
     },
     sampleMetrics: {
       overallHealthScore: 89,
-      skinType: 'Normal',
-      primaryConcern: 'Environmental defense & UV prevention',
-      secondaryConcern: 'Maintaining natural moisture barrier',
+      skinType: 'Normal' as SkinType,
+      primaryConcern: 'Поддержание антиоксидантного сияния',
+      secondaryConcern: 'Сохранение упругости и защита от фотостарения',
       hydration: 88,
       sebumControl: 84,
       barrierHealth: 92,
@@ -558,44 +527,44 @@ export const MINA_PRESETS: {
       eyeAreaFatigue: 82,
       zones: [
         {
-          zone: 'Forehead',
-          metric: 'Luminosity',
+          zone: 'Forehead' as const,
+          metric: 'Гладкость и свет',
           score: 90,
-          severity: 'Optimal',
-          observation: 'Smooth, natural glow with balanced sebum production.',
-          recommendation: 'Continue daily Vitamin C antioxidant shield.',
+          severity: 'Optimal' as const,
+          observation: 'Идеально ровная текстура с деликатным светоотражением.',
+          recommendation: 'Продолжай ежедневную защиту сывороткой с витамином C.',
         },
         {
-          zone: 'T-Zone',
-          metric: 'Pore Refining',
+          zone: 'T-Zone' as const,
+          metric: 'Чистота пор',
           score: 84,
-          severity: 'Optimal',
-          observation: 'Refined pores with clean follicular openings.',
-          recommendation: 'Weekly gentle enzyme exfoliation.',
+          severity: 'Optimal' as const,
+          observation: 'Поры узкие, чистые, жирный блеск отсутствует.',
+          recommendation: 'Раз в неделю деликатная энзимная пудра для полировки кожи.',
         },
         {
-          zone: 'Cheeks',
-          metric: 'Elasticity & Moisture',
+          zone: 'Cheeks' as const,
+          metric: 'Упругость и тургор',
           score: 92,
-          severity: 'Optimal',
-          observation: 'Plump extracellular matrix with optimal turgor.',
-          recommendation: 'Maintain hyaluronic acid and peptide serum.',
+          severity: 'Optimal' as const,
+          observation: 'Плотная, бархатистая, наполненная влагой кожа.',
+          recommendation: 'Поддерживай пептидным уходом и гиалуроновой эссенцией.',
         },
         {
-          zone: 'Under-Eye',
-          metric: 'Smooth Contour',
+          zone: 'Under-Eye' as const,
+          metric: 'Отдохнувший контур',
           score: 82,
-          severity: 'Optimal',
-          observation: 'Minimal dark circles, healthy micro-circulation.',
-          recommendation: 'Caffeine and peptide hydration.',
+          severity: 'Optimal' as const,
+          observation: 'Отсутствие темных кругов, отличное увлажнение век.',
+          recommendation: 'Легкий крем с пептидами и кофеином.',
         },
         {
-          zone: 'Chin',
-          metric: 'Uniformity',
+          zone: 'Chin' as const,
+          metric: 'Крепость барьера',
           score: 88,
-          severity: 'Optimal',
-          observation: 'Uniform skin tone with strong barrier resilience.',
-          recommendation: 'Nightly ceramide barrier cream.',
+          severity: 'Optimal' as const,
+          observation: 'Однородный спокойный тон без раздражений.',
+          recommendation: 'Ночной крем с церамидами для поддержания сияния.',
         },
       ],
     },
@@ -622,7 +591,7 @@ export function analyzeImageHeuristics(canvas: HTMLCanvasElement): SkinMetrics {
   let totalBrightness = 0;
   const count = data.length / 4;
 
-  // Sample every 4th pixel for speed
+  // Sample every 4th pixel for performance
   for (let i = 0; i < data.length; i += 16) {
     const r = data[i];
     const g = data[i + 1];
@@ -639,9 +608,9 @@ export function analyzeImageHeuristics(canvas: HTMLCanvasElement): SkinMetrics {
   const avgB = totalB / sampledCount;
   const avgBrightness = totalBrightness / sampledCount;
 
-  // Calculate redness ratio (R relative to G and B)
+  // Calculate redness ratio
   const rednessRatio = avgR / (Math.max(1, (avgG + avgB) / 2));
-  // Calculate contrast / variance as texture proxy
+  
   const skinType: SkinType =
     rednessRatio > 1.25 ? 'Sensitive' :
     avgBrightness > 160 ? 'Combination' :
@@ -666,43 +635,43 @@ export function analyzeImageHeuristics(canvas: HTMLCanvasElement): SkinMetrics {
   const zones: ZoneAnalysis[] = [
     {
       zone: 'Forehead',
-      metric: 'Sebum Balance',
+      metric: 'Баланс себума',
       score: sebumControl,
       severity: sebumControl < 50 ? 'Needs Attention' : sebumControl < 70 ? 'Mild' : 'Optimal',
-      observation: sebumControl < 50 ? 'Visible lipid sheen across frontal plane.' : 'Well-regulated epidermal barrier.',
-      recommendation: sebumControl < 50 ? 'Use lightweight water-gel with Niacinamide.' : 'Maintain gentle antioxidant hydration.',
+      observation: sebumControl < 50 ? 'Заметный блеск на лобной зоне.' : 'Хорошо сбалансированная бархатная текстура.',
+      recommendation: sebumControl < 50 ? 'Нанеси легкий флюид с ниацинамидом 2%.' : 'Продолжай мягкое ежедневное увлажнение.',
     },
     {
       zone: 'T-Zone',
-      metric: 'Pore Clarity',
+      metric: 'Чистота пор',
       score: poreClarity,
       severity: poreClarity < 50 ? 'Needs Attention' : poreClarity < 70 ? 'Mild' : 'Optimal',
-      observation: poreClarity < 50 ? 'Localized micro-congestion and enlarged pores.' : 'Refined pore structure.',
-      recommendation: 'Targeted BHA salicylic acid treatment.',
+      observation: poreClarity < 50 ? 'Легкая закупорка пор на крыльях носа.' : 'Поры чистые, микрорельеф ровный.',
+      recommendation: 'Мягкое очищение с салициловой кислотой BHA 2 раза в неделю.',
     },
     {
       zone: 'Cheeks',
-      metric: 'Hydration & Capillaries',
+      metric: 'Увлажненность и капилляры',
       score: rednessSensitivity,
       severity: rednessSensitivity < 50 ? 'Needs Attention' : rednessSensitivity < 70 ? 'Mild' : 'Optimal',
-      observation: rednessSensitivity < 50 ? 'Erythema and reactive flushing detected.' : 'Balanced lipid mantle.',
-      recommendation: 'Centella Asiatica and Madecassoside barrier serum.',
+      observation: rednessSensitivity < 50 ? 'Заметна чувствительность и румянец на щеках.' : 'Спокойный ровный тон.',
+      recommendation: 'Сыворотка с центеллой азиатской и мадекассосидом для укрепления сосудов.',
     },
     {
       zone: 'Under-Eye',
-      metric: 'Fatigue & Micro-Circulation',
+      metric: 'Свежесть зоны вокруг глаз',
       score: eyeAreaFatigue,
       severity: eyeAreaFatigue < 55 ? 'Needs Attention' : 'Optimal',
-      observation: eyeAreaFatigue < 55 ? 'Mild vascular pooling and dryness.' : 'Smooth contour.',
-      recommendation: 'Caffeine peptide eye concentrate.',
+      observation: eyeAreaFatigue < 55 ? 'Легкие следы усталости и сухость от экранов.' : 'Отдохнувший свежий взгляд.',
+      recommendation: 'Крем-гель для век с пептидами и кофеином.',
     },
     {
       zone: 'Chin',
-      metric: 'Barrier Resilience',
+      metric: 'Крепость защитного барьера',
       score: barrierHealth,
       severity: barrierHealth < 60 ? 'Needs Attention' : 'Optimal',
-      observation: barrierHealth < 60 ? 'Delicate stratum corneum.' : 'Strong cellular adhesion.',
-      recommendation: 'Ceramide-rich overnight recovery balm.',
+      observation: barrierHealth < 60 ? 'Чувство сухости и нежный барьер.' : 'Крепкий защитный барьер.',
+      recommendation: 'Восстанавливающий крем с церамидами на ночь.',
     },
   ];
 
@@ -710,10 +679,10 @@ export function analyzeImageHeuristics(canvas: HTMLCanvasElement): SkinMetrics {
     overallHealthScore,
     skinType,
     primaryConcern:
-      skinType === 'Sensitive' ? 'Capillary redness & sensitivity' :
-      skinType === 'Oily' ? 'Sebum overproduction & pore congestion' :
-      skinType === 'Dry' ? 'Moisture deficit & barrier tightness' : 'T-Zone balance & hydration',
-    secondaryConcern: 'Daily UV & environmental defense',
+      skinType === 'Sensitive' ? 'Снятие покраснений и защита барьера' :
+      skinType === 'Oily' ? 'Контроль блеска и сужение пор' :
+      skinType === 'Dry' ? 'Глубокое увлажнение и снятие стянутости' : 'Баланс Т-зоны и сияние',
+    secondaryConcern: 'Ежедневная защита от фотостарения SPF 50+',
     hydration,
     sebumControl,
     barrierHealth,
