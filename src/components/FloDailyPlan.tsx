@@ -1,187 +1,33 @@
 'use client';
-
-import React, { useState } from 'react';
-import {
-  Sun,
-  Moon,
-  Sparkles,
-  Check,
-  Copy,
-  ChevronDown,
-  ChevronUp,
-  ShieldCheck,
-  CheckCircle2,
-} from 'lucide-react';
-import confetti from 'canvas-confetti';
-import { SkincareRoutine, SkinMetrics } from '../types';
-
-interface FloDailyPlanProps {
-  routine: SkincareRoutine;
-  metrics: SkinMetrics;
-}
-
-export const FloDailyPlan: React.FC<FloDailyPlanProps> = ({ routine, metrics }) => {
-  const [activeTime, setActiveTime] = useState<'am' | 'pm'>('am');
-  const [completedSteps, setCompletedSteps] = useState<number[]>([1]); // Step 1 pre-completed for satisfaction
-  const [copied, setCopied] = useState<boolean>(false);
-
-  const currentSteps = activeTime === 'am' ? routine.am : routine.pm;
-
-  const toggleStep = (order: number) => {
-    let next: number[];
-    if (completedSteps.includes(order)) {
-      next = completedSteps.filter((s) => s !== order);
-    } else {
-      next = [...completedSteps, order];
-      // Celebrate step completion
-      try {
-        confetti({
-          particleCount: 20,
-          spread: 45,
-          origin: { y: 0.7 },
-          colors: ['#ff5b79', '#ff758f', '#fde047'],
-        });
-      } catch {
-        // ignore
-      }
-    }
-    setCompletedSteps(next);
-  };
-
-  const handleCopy = async () => {
-    const text = `
-=== МОЙ БЬЮТИ-ПЛАН MINA (FLO ДЛЯ ЛИЦА) ===
-Тип: ${metrics.skinType} • Сияние: ${metrics.overallHealthScore}%
-Фокус дня: ${metrics.primaryConcern}
-
-☀️ УТРО (AM):
-${routine.am.map((s) => `[${completedSteps.includes(s.order) ? '✓' : ' '}] Шаг ${s.order}: ${s.productName} (${s.keyActives.join(', ')})`).join('\n')}
-
-🌙 ВЕЧЕР (PM):
-${routine.pm.map((s) => `[ ] Шаг ${s.order}: ${s.productName} (${s.keyActives.join(', ')})`).join('\n')}
-    `.trim();
-
+import { useState } from 'react';
+import { Sun, Moon, Copy, CheckCircle2 } from 'lucide-react';
+import { DailyCarePlan, DailyEntry, EveningFeeling, TimeOfDay } from '../lib/dailyCare';
+interface Props { plan: DailyCarePlan; entry: DailyEntry; activeTime: TimeOfDay; onTimeChange: (period: TimeOfDay) => void; onToggleStep: (period: TimeOfDay, id: string) => void; onReflection: (value: EveningFeeling) => void; onEditSymptoms: () => void; dateLabel: string; }
+export function FloDailyPlan({ plan, entry, activeTime, onTimeChange, onToggleStep, onReflection, onEditSymptoms, dateLabel }: Props) {
+  const [copyState, setCopyState] = useState<'idle' | 'success' | 'error'>('idle');
+  const steps = plan[activeTime];
+  const completed = entry.completed[activeTime];
+  const isComplete = steps.every(step => completed.includes(step.id));
+  const copyPlan = async () => {
+    const periodText = (period: TimeOfDay) => plan[period].map(step => `[${entry.completed[period].includes(step.id) ? '✓' : ' '}] ${step.title}\n${step.detail}`).join('\n\n');
     try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+      await navigator.clipboard.writeText(`Mina · ${dateLabel}\n${plan.focus}\n\nУтро\n${periodText('am')}\n\nВечер\n${periodText('pm')}\n\n${plan.reason}\nОбщая информация об уходе, не медицинское назначение.`);
+      setCopyState('success');
+    } catch { setCopyState('error'); }
   };
-
-  return (
-    <div className="bg-white rounded-3xl p-5 border border-rose-100/80 flo-card-shadow space-y-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
-            <Sparkles className="w-4 h-4 text-[#ff5b79]" />
-            <span>Твой ритуал ухода на сегодня</span>
-          </h3>
-          <p className="text-[11px] text-stone-400">
-            Выполняй шаги и отмечай галочками:
-          </p>
-        </div>
-
-        <button
-          type="button"
-          onClick={handleCopy}
-          className="px-3 py-1 rounded-full text-[11px] font-bold bg-rose-50 text-[#ff5b79] hover:bg-rose-100 transition-all flex items-center gap-1"
-        >
-          {copied ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-          <span>{copied ? 'Скопировано!' : 'В заметки'}</span>
-        </button>
-      </div>
-
-      {/* AM / PM Segmented Control */}
-      <div className="grid grid-cols-2 gap-1.5 p-1 bg-stone-50 rounded-2xl border border-stone-100">
-        <button
-          type="button"
-          onClick={() => setActiveTime('am')}
-          className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
-            activeTime === 'am'
-              ? 'bg-gradient-to-r from-amber-400 to-[#ff758f] text-white shadow-xs'
-              : 'text-stone-600 hover:text-stone-900'
-          }`}
-        >
-          <Sun className="w-3.5 h-3.5" />
-          <span>☀️ Утро (5 шагов)</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTime('pm')}
-          className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
-            activeTime === 'pm'
-              ? 'bg-gradient-to-r from-[#ff5b79] to-purple-600 text-white shadow-xs'
-              : 'text-stone-600 hover:text-stone-900'
-          }`}
-        >
-          <Moon className="w-3.5 h-3.5" />
-          <span>🌙 Вечер (5 шагов)</span>
-        </button>
-      </div>
-
-      {/* Steps List */}
-      <div className="space-y-2.5">
-        {currentSteps.map((step) => {
-          const isDone = completedSteps.includes(step.order);
-          return (
-            <div
-              key={step.order}
-              onClick={() => toggleStep(step.order)}
-              className={`cursor-pointer rounded-2xl p-3.5 border transition-all active:scale-[0.99] flex items-start gap-3 ${
-                isDone
-                  ? 'bg-rose-50/40 border-rose-200/60'
-                  : 'bg-white hover:bg-stone-50/70 border-stone-100'
-              }`}
-            >
-              <div
-                className={`w-6 h-6 rounded-lg mt-0.5 shrink-0 flex items-center justify-center border transition-all ${
-                  isDone
-                    ? 'bg-[#ff5b79] border-[#ff5b79] text-white shadow-xs'
-                    : 'bg-stone-50 border-stone-200 text-stone-300'
-                }`}
-              >
-                <Check className={`w-3.5 h-3.5 ${isDone ? 'opacity-100' : 'opacity-0'}`} />
-              </div>
-
-              <div className="space-y-1 flex-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400">
-                    Шаг 0{step.order} • {step.phase === 'Cleanse' ? 'Очищение' : step.phase === 'Tone & Prep' ? 'Тонизирование' : step.phase === 'Target & Treat' ? 'Сыворотка' : step.phase === 'Hydrate & Seal' ? 'Увлажнение' : 'Защита от солнца'}
-                  </span>
-                  {isDone && (
-                    <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.2 rounded-full">
-                      Выполнено ✨
-                    </span>
-                  )}
-                </div>
-
-                <h4 className={`text-xs sm:text-sm font-bold leading-snug ${isDone ? 'text-stone-500 line-through' : 'text-stone-900'}`}>
-                  {step.productName}
-                </h4>
-
-                <div className="flex flex-wrap gap-1 pt-0.5">
-                  {step.keyActives.map((active) => (
-                    <span
-                      key={active}
-                      className="text-[10px] font-semibold px-2 py-0.2 rounded-full bg-rose-50 text-[#ff5b79] border border-rose-100/60"
-                    >
-                      + {active}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="text-[11px] text-stone-500 leading-relaxed pt-1">
-                  💡 <strong className="text-stone-700">Секрет: </strong>{step.usageAdvice}
-                </p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
+  return <section aria-labelledby="routine-heading" className="mina-routine space-y-4">
+    <div className="flex items-start justify-between gap-3"><div><h2 id="routine-heading" tabIndex={-1} className="text-base font-bold text-stone-900">Твой ежедневный уход</h2><p className="mt-1 text-sm text-stone-600">{dateLabel} · Несколько простых шагов</p></div><button type="button" onClick={copyPlan} className="inline-flex shrink-0 items-center gap-1.5 min-h-11 px-2 text-sm text-rose-800 font-semibold" aria-label="Скопировать план ухода"><Copy className="w-4 h-4" aria-hidden="true" /><span>В заметки</span></button></div>
+    {copyState !== 'idle' && <p role="status" className="text-sm text-stone-600">{copyState === 'success' ? 'План скопирован. При изменении отметок скопируй его заново.' : 'Не удалось скопировать. Проверь разрешение браузера на доступ к буферу обмена.'}</p>}
+    <div className="grid grid-cols-2 gap-1 p-1 bg-[#eeeae7] rounded-xl" role="group" aria-label="Время ухода">{(['am', 'pm'] as const).map(period => <button key={period} type="button" aria-pressed={activeTime === period} onClick={() => onTimeChange(period)} className={`min-h-12 flex items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold ${activeTime === period ? 'bg-white text-stone-900' : 'text-stone-500 hover:bg-white/60'}`}>{period === 'am' ? <Sun className="w-4 h-4" aria-hidden="true" /> : <Moon className="w-4 h-4" aria-hidden="true" />}{period === 'am' ? 'Утро' : 'Вечер'} · {entry.completed[period].length}/{plan[period].length}</button>)}</div>
+    <p className="text-xs text-stone-500">{activeTime === 'am' ? 'Утренние' : 'Вечерние'} отметки сохраняются отдельно.</p>
+    <div className="space-y-3">{steps.map((step, index) => {
+      const done = completed.includes(step.id);
+      return <article key={step.id} className={`mina-step ${done ? 'mina-step-done' : ''}`}>
+        <label className="flex items-start gap-3 cursor-pointer min-h-11"><input type="checkbox" checked={done} onChange={() => onToggleStep(activeTime, step.id)} aria-label={`${activeTime === 'am' ? 'Утро' : 'Вечер'}: ${step.title}`} className="mt-1 w-5 h-5 accent-rose-600 shrink-0" /><span className="flex-1"><span className="block text-xs text-stone-500 mb-1">Шаг {index + 1}{done ? ' · Выполнено' : ''}</span><span className="block text-sm font-semibold text-stone-900">{step.title}</span></span></label>
+        <details className="mt-1 pl-8 text-sm text-stone-600"><summary className="min-h-8 cursor-pointer font-medium text-rose-800">Как сделать</summary><p className="pt-2 leading-relaxed">{step.detail}</p><p className="pt-2 text-xs leading-relaxed text-stone-500">{step.ingredients}</p></details>
+      </article>;
+    })}</div>
+    {isComplete && <div role="status" className="flex items-start gap-2 text-sm text-rose-900 bg-rose-50 rounded-2xl p-3"><CheckCircle2 className="w-5 h-5 shrink-0" aria-hidden="true" />{activeTime === 'am' ? 'Утренний ритуал отмечен. Можно продолжать день.' : 'Вечерний ритуал отмечен. Спасибо за заботу о себе.'}</div>}
+    {activeTime === 'pm' && <fieldset className="border-t border-rose-100 pt-4"><legend className="text-sm font-semibold text-stone-800 pt-4">Как коже к вечеру?</legend><div className="flex flex-wrap gap-2 pt-2">{([{ value: 'better', label: 'Комфортнее' }, { value: 'same', label: 'Так же' }, { value: 'worse', label: 'Менее комфортно' }] as const).map(option => <button key={option.value} type="button" aria-pressed={entry.eveningFeeling === option.value} onClick={() => onReflection(option.value)} className={`min-h-11 rounded-full border px-3 text-sm ${entry.eveningFeeling === option.value ? 'bg-rose-100 text-rose-900 border-rose-300' : 'text-stone-600 border-stone-200'}`}>{option.label}</button>)}</div><p className="mt-3 text-xs text-stone-500">Твоя самооценка для дневника; она не доказывает эффект средства.</p>{entry.eveningFeeling === 'worse' && <p className="mt-3 text-sm text-stone-700">Появились новые ощущения? <button type="button" onClick={onEditSymptoms} className="underline text-rose-800 min-h-11">Уточни их в дневнике</button>, чтобы обновить фокус ухода.</p>}</fieldset>}
+  </section>;
+}

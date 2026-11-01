@@ -1,117 +1,69 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Sparkles, BookOpen, ChevronRight, X } from 'lucide-react';
+import React from 'react';
+import { BookOpen, ChevronDown, ExternalLink } from 'lucide-react';
 
-export const FloInsights: React.FC = () => {
-  const [activeStory, setActiveStory] = useState<{ title: string; content: string; tag: string } | null>(null);
+const insights = [
+  {
+    id: 'gentle-cleansing',
+    tag: 'Комфорт кожи',
+    title: 'После умывания тянет кожу?',
+    preview: 'Ощущения помогают заметить, когда привычный уход стоит пересмотреть.',
+    content: 'Стянутость сама по себе не измеряет увлажнённость и не подтверждает повреждение барьера. Для мягкого очищения AAD рекомендует неабразивное средство, чуть тёплую воду и умывание кончиками пальцев без трения. При сухости или зуде может помочь привычное увлажняющее средство. Если дискомфорт сохраняется, обсуди его с дерматологом.',
+    source: 'AAD: Face washing 101',
+    url: 'https://www.aad.org/public/everyday-care/skin-care-basics/care/face-washing-101',
+  },
+  {
+    id: 'new-product',
+    tag: 'Новое средство',
+    title: 'Познакомь кожу с новым уходом',
+    preview: 'Добавляй средства постепенно и отмечай свою реакцию.',
+    content: 'Перед добавлением косметического средства AAD рекомендует пробовать его на небольшом участке кожи в течение 7–10 дней, учитывая инструкцию средства. При реакции прекрати использование. Выраженное или сохраняющееся раздражение — повод обратиться к специалисту. Домашняя проба не заменяет медицинское обследование на контактную аллергию.',
+    source: 'AAD: How to test skin care products',
+    url: 'https://www.aad.org/public/everyday-care/skin-care-secrets/prevent-skin-problems/test-skin-care-products',
+  },
+  {
+    id: 'sun-protection',
+    tag: 'Защита от солнца',
+    title: 'SPF — это ещё и обновление',
+    preview: 'Защита нужна и в облачный день. Ориентируйся на время на улице.',
+    content: 'AAD рекомендует солнцезащитное средство широкого спектра UVA/UVB с SPF 30 или выше и водостойкостью. Наноси достаточное количество по инструкции, не забывая шею и уши. На улице обновляй защиту примерно каждые два часа и после плавания или потоотделения. «Два пальца» — приблизительная подсказка, а не универсальная точная доза.',
+    source: 'AAD: How to apply sunscreen',
+    url: 'https://www.aad.org/public/everyday-care/sun-protection/shade-clothing-sunscreen/how-to-apply-sunscreen',
+  },
+];
 
-  const insights = [
-    {
-      id: 'niacinamide',
-      tag: 'Компонент дня',
-      title: 'Ниацинамид: секрет сужения пор и бархатного финиша',
-      preview: 'Почему этот витамин B3 подходит и при жирном блеске, и при чувствительности.',
-      content:
-        'Ниацинамид (витамин B3 в концентрации 2–5%) стимулирует синтез собственных церамидов в коже, сужает устья пор и регулирует выработку кожного сала. В отличие от агрессивных кислот, он не повышает чувствительность к солнцу и подходит для круглогодичного применения.',
-      bg: 'from-rose-100 via-pink-50 to-white',
-      accent: 'text-rose-600',
-    },
-    {
-      id: 'barrier',
-      tag: 'Уход за барьером',
-      title: 'Стянутость после умывания — это не норма',
-      preview: 'Если кожа «скрипит» от чистоты, её защитный липидный слой повреждён.',
-      content:
-        'Ощущение «скрипа» означает, что жесткие ПАВы смыли не только загрязнения, но и липидный цемент, удерживающий воду. Замени агрессивную пенку на слабокислотную (pH 5.5) или очищающую эмульсию с аминокислотами.',
-      bg: 'from-amber-100 via-rose-50 to-white',
-      accent: 'text-amber-700',
-    },
-    {
-      id: 'spf',
-      tag: 'Защита от солнца',
-      title: 'Правило двух пальцев для SPF 50+',
-      preview: 'Сколько крема на самом деле нужно, чтобы защитить лицо от пигментации.',
-      content:
-        'Чтобы получить заявленный на упаковке уровень защиты SPF 50+, необходимо около 1.25 мл крема на лицо — это ровно две плотные полоски средства, нанесенные вдоль указательного и среднего пальцев.',
-      bg: 'from-sky-100 via-teal-50 to-white',
-      accent: 'text-teal-700',
-    },
-  ];
-
-  return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between px-1">
-        <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
-          <BookOpen className="w-4 h-4 text-[#ff5b79]" />
-          <span>Инсайты дня от Mina</span>
-        </h3>
-        <span className="text-[11px] font-semibold text-[#ff5b79]">3 статьи</span>
-      </div>
-
-      {/* Horizontal Story Cards Carousel */}
-      <div className="flex gap-3 overflow-x-auto pb-1 no-scrollbar">
-        {insights.map((item) => (
-          <div
-            key={item.id}
-            onClick={() => setActiveStory(item)}
-            className="cursor-pointer shrink-0 w-64 bg-white rounded-3xl p-4 border border-rose-100/80 flo-card-shadow hover:border-rose-300 transition-all active:scale-[0.98] flex flex-col justify-between space-y-3"
-          >
-            <div className="space-y-1.5">
-              <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-50 ${item.accent}`}>
-                {item.tag}
-              </span>
-              <h4 className="text-xs font-bold text-stone-900 leading-snug line-clamp-2">
-                {item.title}
-              </h4>
-              <p className="text-[11px] text-stone-500 leading-relaxed line-clamp-2">
-                {item.preview}
-              </p>
-            </div>
-
-            <div className="pt-2 border-t border-rose-50 flex items-center justify-between text-[11px] font-bold text-[#ff5b79]">
-              <span>Читать инсайт</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Story Detail Modal */}
-      {activeStory && (
-        <div className="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl border border-rose-100 animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-50 text-[#ff5b79]">
-                {activeStory.tag}
-              </span>
-              <button
-                type="button"
-                onClick={() => setActiveStory(null)}
-                className="w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-500"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <h3 className="text-base font-bold text-stone-900 leading-snug">
-              {activeStory.title}
-            </h3>
-
-            <p className="text-xs text-stone-600 leading-relaxed font-medium">
-              {activeStory.content}
-            </p>
-
-            <button
-              type="button"
-              onClick={() => setActiveStory(null)}
-              className="w-full py-2.5 rounded-full bg-[#ff5b79] text-white text-xs font-bold shadow-sm"
-            >
-              Понятно, спасибо!
-            </button>
-          </div>
-        </div>
-      )}
+export const FloInsights: React.FC = () => (
+  <section className="space-y-3" aria-labelledby="mina-insights-title">
+    <div className="flex items-center justify-between gap-3 px-1">
+      <h2 id="mina-insights-title" className="flex items-center gap-2 text-base font-bold text-stone-900">
+        <BookOpen className="h-4 w-4 text-[#b52b4b]" aria-hidden="true" />
+        Об уходе — понятнее
+      </h2>
+      <span className="text-xs text-stone-500">3 памятки</span>
     </div>
-  );
-};
+    <div className="flex items-start gap-3 overflow-x-auto pb-3">
+      {insights.map((item) => (
+        <details key={item.id} className="group w-72 shrink-0 rounded-3xl border border-rose-100 bg-white flo-card-shadow">
+          <summary className="cursor-pointer list-none rounded-3xl p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b52b4b] [&::-webkit-details-marker]:hidden">
+            <span className="text-xs font-semibold text-[#b52b4b]">{item.tag}</span>
+            <span className="mt-2 block text-base font-bold leading-snug text-stone-900">{item.title}</span>
+            <span className="mt-2 block text-sm leading-relaxed text-stone-600">{item.preview}</span>
+            <span className="mt-4 flex items-center justify-between border-t border-rose-50 pt-3 text-sm font-semibold text-[#b52b4b]">
+              Читать памятку
+              <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
+            </span>
+          </summary>
+          <div className="space-y-4 px-5 pb-5">
+            <p className="text-sm leading-relaxed text-stone-700">{item.content}</p>
+            <a href={item.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-1.5 rounded text-xs font-semibold text-[#b52b4b] underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b52b4b]">
+              <span>{item.source} (на английском, новая вкладка)</span>
+              <ExternalLink className="mt-0.5 h-3 w-3 shrink-0" aria-hidden="true" />
+            </a>
+          </div>
+        </details>
+      ))}
+    </div>
+    <p className="px-1 text-xs leading-relaxed text-stone-500">Образовательные материалы помогают разобраться в уходе и не заменяют консультацию специалиста.</p>
+  </section>
+);

@@ -13,6 +13,7 @@ dist/
 .env
 .env*.local
 .env.*
+!.env.example
 
 # OS files
 .DS_Store
@@ -21,3 +22,11 @@ dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Generated iOS bundles and local Xcode output
+dist-ios/
+ios/App/App/public/
+ios/App/build/
+**/xcuserdata/
+*.xcuserstate
+.scratch/ios-native/legacy/

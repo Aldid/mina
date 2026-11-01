@@ -1,0 +1,7 @@
+{
+  "runtime": "onnxruntime-web",
+  "version": "1.31.1",
+  "modelUrl": "https://huggingface.co/mufasabrownie/glowlytics-skin-models/resolve/a1bbdb624b6045bdb1503050c56045728f2efaf0/acne_detector.onnx",
+  "sha256": "de7b25f3d1e2af69ee18f2b55cb6d93edf3c8dd29662a1c64cf8d903c3fa8526",
+  "scope": "local experimental prototype; resolve MIT/AGPL discrepancy before publishing"
+}
